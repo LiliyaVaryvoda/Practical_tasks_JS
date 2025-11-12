@@ -1,6 +1,6 @@
 // 1. REMOVE REPEATED WORDS
 
-function removeWords(str){
+function removeWords(str) {
     const cleareArr = new Set(str.toLowerCase().replace(/\s+/g, ' ').trim().split(' '))
     return [...cleareArr].join(' ')
 }
@@ -14,16 +14,18 @@ console.log(removeWords('Word word WORD'));                  // 'word'
 
 
 
+
 // 2. REMOVE DUPLICATES FROM STRING
 
 
-function removeDup(str){
+function removeDup(str) {
     const uniqueSet = new Set(str.split(''))
     return [...uniqueSet].join('')
 }
 
-console.log(removeDup("helhlo worlood")) 
+console.log(removeDup("helhlo worlood"))
 //helo wrd
+
 
 
 
@@ -31,7 +33,7 @@ console.log(removeDup("helhlo worlood"))
 
 // 3. REMOVE ALL WHITE SPACES FROM THE STRING
 
-function removeSpaces(str){
+function removeSpaces(str) {
     return str.replace(/\s+/g, '')
 }
 
@@ -43,11 +45,44 @@ console.log(removeSpaces('    h   ello worl     d       '))
 
 
 
+
 //  4. REMOVE ALL DIGITS FROM THE STRING
 
-function removeDigits(str){
+function removeDigits(str) {
     return str.replace(/\d+/g, '')
 }
 
-console.log(removeDigits('hello3 wor5ld 6')) 
+console.log(removeDigits('hello3 wor5ld 6'))
 //hello world 
+
+
+
+
+
+
+// 5. REMOVE ALL PUNCTUATION FROM SENTENSE
+
+function removePunctuationFromSentense(str) {
+    return str.replace(/[\p{P}\p{S}]/gu, '')
+}
+
+console.log(removePunctuationFromSentense('hell!o.w@rld,here ?how^\:'))
+//helloworldhere how
+
+
+
+
+
+
+// 6. REMOVE ALL PUNCTUATION VARIANT 2
+
+function removePunc(str) {
+    const regex = /[a-zA-Z0-9 ]/
+    const myArr = str.split('')
+    const myArr2 = myArr.filter(char => regex.test(char)).join('')
+    return myArr2
+}
+
+
+console.log(removePunc('hell!o.world,here ?how^\:'))
+//helloworldhere how
