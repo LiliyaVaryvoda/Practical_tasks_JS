@@ -25,7 +25,7 @@ function returnVowels(str){
     let result = ''
     let noVowels = ''
     for (let char of str){
-        if (vowels.includes(char)){
+        if (vowels.includes(char.toLowerCase())){
             result+=char
         }
         else{

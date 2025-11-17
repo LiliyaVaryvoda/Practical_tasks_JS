@@ -13,6 +13,7 @@ console.log(capitalizeFirstLetterOfEachWord("hello world, hOw are you?")) // Hel
 
 
 
+
 // 2. SWIPE THE CASE OF EACH CHARACTER IN STRING
 
 function changeCaseForChar(str){
@@ -28,7 +29,7 @@ function changeCaseForChar(str){
     return caseChangeStr
 }
 
-console.log(changeCaseForChar('hELLo WorlD'))
+console.log(changeCaseForChar('hELLo WorlD')) // HellO wORLd
 
 
 
@@ -36,13 +37,87 @@ console.log(changeCaseForChar('hELLo WorlD'))
 
 
 
-// 3. MAKE SEPARATE WORDS FROM CAMEL CASE
 
-function camelCaseSplit(str) {
-    return str.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+// 3. RETURN WORDS IN APLHABETICAL ORDER
+
+function returnWordsAlphabetically(str){
+    const arrayOfWords = str.toLowerCase().split(/[^a-zA-Z]/g).filter(Boolean)
+    return arrayOfWords.sort((a,b) => a.localeCompare(b))
 }
 
-console.log(camelCaseSplit('thisIsCamelCase')) // this Is Camel Case
-console.log(camelCaseSplit('HTMLParser')) // HTML Parser
-console.log(camelCaseSplit('HelloWorld')) // Hello World
-console.log(camelCaseSplit('userIDNumber')) // user ID Number
+console.log(returnWordsAlphabetically('The quick brown fox jumps over the lazy dog'))
+
+
+
+
+
+
+
+
+// 4. GENERATE A RANDOM ALPHANUMERICAL STRING OF GIVEN LENGTH
+
+function generateRandomStr(num){
+    const values = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    let result = ''
+    for (let i = 0; i < num; i++){
+        let randomIndex = Math.floor(Math.random() * values.length)
+        result+= values.charAt(randomIndex)
+    }
+    return result
+}
+
+console.log(generateRandomStr(11)) // any random for length 11 aka 6YM8OAdctW8
+
+
+
+
+
+
+
+
+
+// 5. MASK DIGITS OF PHONE EXCEPT LAST FEW
+
+function maskDigits(str, num){
+    let numbersArray = []
+    let digitsSeen = 0
+    for(let i = str.length-1; i>=0; i--){
+        if(/\d/.test(str[i])){
+
+            if(digitsSeen<num){
+
+                numbersArray.unshift(str[i])
+                digitsSeen++
+            }
+            else{
+                numbersArray.unshift('*')
+            }
+        }
+        else{
+            numbersArray.unshift(str[i])
+        }
+    }
+    return numbersArray.join('')
+
+}
+
+console.log(maskDigits('123-456-78-9-0', 4));  // ***-***-78-9-0
+console.log(maskDigits('98 76543210', 4));    // ******3210
+console.log(maskDigits('5551234', 3));       // ****234
+
+
+
+
+
+
+
+
+// 6. PAD STRING WITH * TO LENGTH NUMBER FROM LEFT TO RIGHT
+
+function padStrWithAsterisks(str, num){
+    return str.padStart(num, '*')
+}
+
+console.log(padStrWithAsterisks('hello', 10));       // *****hello
+console.log(padStrWithAsterisks('helloworld', 10));  // helloworld (already 10)
+console.log(padStrWithAsterisks('hi', 5));          // ***hi

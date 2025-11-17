@@ -21,8 +21,8 @@ console.log(isPalindrome("A man, a plan, a canal: Panama")) // true
 
 
 function checkIfAnagram(str1, str2) {
-    const sortedStr1 = str1.toLowerCase().split('').sort().join('')
-    const sortedStr2 = str2.toLowerCase().split('').sort().join('')
+    const sortedStr1 = str1.toLowerCase().replace(/[^a-z0-9]/gi, '').split('').sort().join('')
+    const sortedStr2 = str2.toLowerCase().replace(/[^a-z0-9]/gi, '').split('').sort().join('')
     return sortedStr1 === sortedStr2
 
 }
@@ -30,6 +30,7 @@ function checkIfAnagram(str1, str2) {
 console.log(checkIfAnagram("listen", "silent")); // true
 console.log(checkIfAnagram("listeN", "Silent")); // true
 console.log(checkIfAnagram("listen", "hello")); // false
+
 
 
 
@@ -95,3 +96,22 @@ console.log(checkIfPangram('The quick brown fox jumps over the lazy dog.')) //tr
 console.log(checkIfPangram('The quick brown fox jumps over the lazy dog@!.')) //true
 console.log(checkIfPangram('Pack my box with five dozen liquor jugs.')) // true
 console.log(checkIfPangram('Hello world.')) // false
+
+
+
+
+
+
+
+
+
+// 6. CHECK IF STRING CONTAINS ALL VOWELS
+
+function checkIfAllVowels(str){
+    const vowels = ['a', 'o', 'i', 'e', 'u']
+    return vowels.every(v => str.toLowerCase().includes(v))
+}
+
+console.log(checkIfAllVowels('education')) // true
+console.log(checkIfAllVowels('sequoia')) // true
+console.log(checkIfAllVowels('hello'))   // false

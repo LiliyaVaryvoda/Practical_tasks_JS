@@ -18,6 +18,17 @@ function findOccurrencesStr(str) {
 
 console.log(findOccurrencesStr("prgogrammingg"))
 
+// Map(8) {
+//     'p' => 1,
+//     'r' => 2,
+//     'g' => 4,
+//     'o' => 1,
+//     'a' => 1,
+//     'm' => 2,
+//     'i' => 1,
+//     'n' => 1
+//   }
+
 
 
 
@@ -44,6 +55,17 @@ function findOccurrencesWords(str) {
 
 console.log(findOccurrencesWords("Hello world how are you hello, doing hello are ok?"))
 
+// Map(7) {
+//     'hello' => 3,
+//     'world' => 1,
+//     'how' => 1,
+//     'are' => 2,
+//     'you' => 1,
+//     'doing' => 1,
+//     'ok' => 1
+//   }
+
+
 
 
 
@@ -61,7 +83,7 @@ function findSmallestOccurencies(str) {
         if (wordsMap.has(strWithoutSpaces[i])) {
             wordsMap.set(
                 strWithoutSpaces[i],
-                wordsMap.has(strWithoutSpaces[i]) + 1
+                wordsMap.get(strWithoutSpaces[i]) + 1
             )
         } else {
             wordsMap.set(strWithoutSpaces[i], 1)
@@ -85,7 +107,7 @@ function findSmallestOccurencies(str) {
 
 
 console.log(findSmallestOccurencies('hello world here'))
-//{ h: 1, e: 1, w: 1, r: 1, d: 1 }
+// { w: 1, d: 1 }
 
 
 
@@ -99,7 +121,6 @@ function findBiggestOccurencies(str) {
     let mapChar = new Map()
     let biggestNum = 0
     let biggestOccurencies = {}
-    console.log(clearedStr)
     for (let char = 0; char < clearedStr.length; char++) {
         if (mapChar.has(clearedStr[char])) {
             mapChar.set(clearedStr[char], mapChar.get(clearedStr[char]) + 1)
@@ -124,7 +145,7 @@ function findBiggestOccurencies(str) {
 }
 
 
-console.log(findBiggestOccurencies('hello world here heh'))
+console.log(findBiggestOccurencies('hello world here heh')) // { h: 4, e: 4 }
 
 
 
@@ -143,9 +164,6 @@ function findNonRepetative(str) {
             mapOccurencies.set(str[char], 1)
         }
     }
-
-    console.log(mapOccurencies)
-
 
     for (let [key, value] of mapOccurencies.entries()) {
         if (value === 1) {
@@ -280,9 +298,8 @@ console.log(findAllIndices("hello world", "o"))
 
 function findShortestWord(str){
     let strArray = str.split(/[^a-zA-Z]+/).filter(Boolean)
-    console.log(strArray)
     return strArray.reduce((shortest, current) => {
-        return shortest.length<current.length ? shortest : current
+        return shortest.length>current.length ? current : shortest
     })
 }
 
@@ -314,7 +331,7 @@ function countConsonants(str){
 
 console.log(countConsonants('opIu dh!gNfin FF&'))
 
-
+// Map(6) { 'p' => 1, 'd' => 1, 'h' => 1, 'g' => 1, 'n' => 2, 'f' => 3 }
 
 
 
@@ -324,8 +341,24 @@ console.log(countConsonants('opIu dh!gNfin FF&'))
 
 function countWordsInSentense(str){
     const splitArray = str.split(/[^a-zA-Z]/g).filter(Boolean)
-    console.log(splitArray)
     return splitArray.length
 }
 
-console.log(countWordsInSentense('Hello   world,how are you?'))
+console.log(countWordsInSentense('Hello   world,how are you?')) //5
+
+
+
+
+
+
+
+
+// 14. COUNT TOTAL SENTENCES IN PARAGRAPH
+
+function countSentencesInParagraph(str){
+    const sentence = str.split(/[.?!]/).map(sen => sen.trim()).filter(Boolean)
+    return sentence.length
+}
+
+console.log(countSentencesInParagraph('It was a bright sunny morning, and the birds were singing cheerfully in the garden. Sarah decided to take a walk around the park to enjoy the fresh air and the colorful flowers. As she strolled along the winding paths, she noticed children playing joyfully on the swings and people walking their dogs. Hello!     How are you? Are you ok ???'))
+// 6
