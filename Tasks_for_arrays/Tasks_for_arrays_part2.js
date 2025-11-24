@@ -174,3 +174,24 @@ function findMissingNumber(arr, num){
 
 console.log(findMissingNumber([1, 3, 4, 6, 2, 7, 8, 9], 9)) //5
 console.log(findMissingNumber([1, 2, 4, 5], 5)) // 3
+
+
+
+
+
+
+
+
+// 9. FIND INDEX OF ELEMENT IN ARRAY
+
+function findIndexOfElemInArr(arr, elem){
+    return arr.findIndex(e => e===elem)
+
+}
+
+console.log(findIndexOfElemInArr(['a', 'b', 'c', 'd', 'e', 'f'], 'c')) //2
+console.log(findIndexOfElemInArr(['a', 'b', 'c', 'd', 'e', 'f'], 'n')) //-1
+
+
+
+

@@ -66,3 +66,50 @@ function replaceWordWithX(str){
 
 console.log(replaceWordWithX('I went to the store to buy some groceries because I realized we were out of milk, bread, and eggs.'))
 // I X to X store X buy X groceries X I X we X out X milk, X and X
+
+
+
+
+
+
+
+
+// 5. REPLACE EVERY VOWEL FROM ALPHABET
+
+function replaceVowelFromAlphabet(str){
+    const vowels = 'aeuioAEUIO'
+    let updatedStr =''
+    for (let char = 0; char < str.length; char++){
+        if (vowels.includes(str[char])){
+            let char2 = String.fromCharCode(str[char].charCodeAt(0)+ 1)
+            updatedStr+=char2
+        }
+        else{
+            updatedStr+=str[char]
+        }
+    }
+    return updatedStr
+}
+
+console.log(replaceVowelFromAlphabet('Hello world'))
+//Hfllp wprld
+
+
+
+
+
+
+
+
+
+
+// 6. CHECK IF STRING CONTAINS ONLY ASCII CHARACTERS
+
+function checkForASCIIChar(str){
+    return /^[\x20-\x7E]*$/.test(str)
+}
+
+console.log(checkForASCIIChar("hello"));         // true
+console.log(checkForASCIIChar("123!@#"));        // true
+console.log(checkForASCIIChar("café"));          // false (é is not ASCII)
+console.log(checkForASCIIChar("你好"));           // false (Chinese characters)

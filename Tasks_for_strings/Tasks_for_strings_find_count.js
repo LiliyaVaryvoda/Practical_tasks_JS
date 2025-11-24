@@ -362,3 +362,44 @@ function countSentencesInParagraph(str){
 
 console.log(countSentencesInParagraph('It was a bright sunny morning, and the birds were singing cheerfully in the garden. Sarah decided to take a walk around the park to enjoy the fresh air and the colorful flowers. As she strolled along the winding paths, she noticed children playing joyfully on the swings and people walking their dogs. Hello!     How are you? Are you ok ???'))
 // 6
+
+
+
+
+
+
+
+
+
+
+
+// 15. FIND LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS
+
+function findSubStr(str) {
+    let left = 0
+    let maxStr = ''
+
+    for (let right = 0; right < str.length; right++) {
+
+        for (let currentWindow = left; currentWindow < right; currentWindow++) {
+
+            if (str[currentWindow] === str[right]) {
+                left = currentWindow + 1
+                break
+            }
+        }
+
+        if (right - left + 1 > maxStr.length) {
+            maxStr = str.slice(left, right + 1)
+        }
+    }
+
+    return maxStr
+}
+
+
+
+
+console.log(findSubStr('abcabcd')) //abcd
+console.log(findSubStr('acbdc')) // acbd
+console.log(findSubStr("abcae")); // "bcae"
