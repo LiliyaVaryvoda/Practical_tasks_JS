@@ -36,6 +36,7 @@ console.log(returnLargestDifference([6, 1]))           // 5
 
 
 
+
 // 3. COUNT TRUTHYU AND FALSY VALUES IN ARRAY
 
 function countTruthyFaslyValues(arr) {
@@ -52,6 +53,7 @@ console.log(countTruthyFaslyValues([0, 1, "", "hello", null, undefined, [], {}, 
 
 
 
+
 //  4. MOVE NUMBER 0 TO THE END OR ARRAY
 
 function moveDigitsInArray(arr) {
@@ -61,6 +63,7 @@ function moveDigitsInArray(arr) {
 }
 
 console.log(moveDigitsInArray([0, 6, 3, 'hello', 0, 5, 'world']))  //[ 6, 3, 'hello', 5, 'world', 0, 0 ]
+
 
 
 
@@ -163,7 +166,7 @@ console.log(findCommonPrefix(["dog", "dog", "dog"])) //dog
 
 
 
-// 8. FIND MISSING NUMBER FROM 1 TO N
+// 8. FIND MISSING NUMBER FROM 1 TO N IN ARRAY
 
 function findMissingNumber(arr, num){
     const expectedSum =  num*(num+1)/2
@@ -195,3 +198,58 @@ console.log(findIndexOfElemInArr(['a', 'b', 'c', 'd', 'e', 'f'], 'n')) //-1
 
 
 
+
+
+
+
+
+// 10. FIND MINIMUM NUMBER IN ARRAY OF OBJECTS
+
+function findMinimumNumInArr(arr){
+    let minMum = Math.min(...arr.map(elem => elem.n))
+    let objctMin = arr.find(elem => elem.n === minMum)
+    return objctMin
+}
+
+console.log(findMinimumNumInArr([{ n: 6 }, { n: 2 }, {n:5}])) //2
+
+
+
+
+
+
+
+
+
+// 11. REMOVE SPECIFIC VALUES IN-PLACE
+
+function removeValueInPlace(arr, num){
+    for(let i = arr.length-1; i>=0; i--){
+        console.log(arr[i])
+        if (arr[i] === num){
+            arr.splice(i, 1)
+        }
+    }
+    return arr
+}
+
+console.log(removeValueInPlace([3, 1, 2, 3, 4, 3], 3)) // [ 1, 2, 4 ]
+
+
+
+
+
+
+
+
+
+
+
+// 12. RETURN NEW ARRAY WITH SQUARED NUMBERS
+
+function squaredNumArr(arr){
+    const arr2 = arr.map(elem => Math.pow(elem, 2))
+    return arr2
+}
+
+console.log(squaredNumArr([4,6,7,8])) // [ 16, 36, 49, 64 ]

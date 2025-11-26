@@ -182,6 +182,7 @@ console.log(findNonRepetative("aabbbvbc"))
 
 
 
+
 // 6. COUNT UPPERCASE AND LOWERCASE LETTERS
 
 function countCaseLetters(str) {
@@ -230,6 +231,9 @@ console.log(findCommonLetters('letoa', 'hello')) // [ 'l', 'e', 'o' ]
 
 
 
+
+
+
 // 8. FIND TOTAL NUMBER OF DIGITS IN STRING
 
 function findTotalNumOfDigits(str){
@@ -238,6 +242,10 @@ function findTotalNumOfDigits(str){
 
 console.log(findTotalNumOfDigits('he110 wor1d!')) //4
 console.log(findTotalNumOfDigits('h7j5j4k9')) //4
+
+
+
+
 
 
 
@@ -274,6 +282,8 @@ console.log(countVowelsInStr('opIudhgnfi'))
 
 
 
+
+
 // 10. FIND OCCURENCIES OF CHARACTER IN STRING
 
 function findAllIndices(str, char){
@@ -294,6 +304,9 @@ console.log(findAllIndices("hello world", "o"))
 
 
 
+
+
+
 // 11. FIND SHORTEST WORD IN SENTENCE
 
 function findShortestWord(str){
@@ -304,6 +317,9 @@ function findShortestWord(str){
 }
 
 console.log(findShortestWord('beautifully hello, world amazing')) // hello
+
+
+
 
 
 
@@ -337,6 +353,10 @@ console.log(countConsonants('opIu dh!gNfin FF&'))
 
 
 
+
+
+
+
 // 13. COUNT WORDS IN SENTENSE
 
 function countWordsInSentense(str){
@@ -345,6 +365,8 @@ function countWordsInSentense(str){
 }
 
 console.log(countWordsInSentense('Hello   world,how are you?')) //5
+
+
 
 
 
@@ -403,3 +425,32 @@ function findSubStr(str) {
 console.log(findSubStr('abcabcd')) //abcd
 console.log(findSubStr('acbdc')) // acbd
 console.log(findSubStr("abcae")); // "bcae"
+
+
+
+
+
+
+
+
+
+
+
+// 16. COUNT HOW MANY TIMES SUBSTRING APPREAS IN STRING
+
+function countSubstringOccurency(str, substr){
+    let count = 0
+
+    for (let i = 0; i <str.length; i++){
+        if (str.slice(i, substr.length+i) === substr){
+            count++
+        }
+    }
+
+    return count
+}
+
+console.log(countSubstringOccurency('hello hello hello', 'hello')) //3
+console.log(countSubstringOccurency('abababa', 'aba')) //3
+console.log(countSubstringOccurency('aaaaa', 'aa')) //4
+console.log(countSubstringOccurency('abc', '')) //0

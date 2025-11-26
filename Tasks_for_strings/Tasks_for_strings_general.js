@@ -14,6 +14,7 @@ console.log(capitalizeFirstLetterOfEachWord("hello world, hOw are you?")) // Hel
 
 
 
+
 // 2. SWIPE THE CASE OF EACH CHARACTER IN STRING
 
 function changeCaseForChar(str){
@@ -30,6 +31,7 @@ function changeCaseForChar(str){
 }
 
 console.log(changeCaseForChar('hELLo WorlD')) // HellO wORLd
+
 
 
 
@@ -121,3 +123,19 @@ function padStrWithAsterisks(str, num){
 console.log(padStrWithAsterisks('hello', 10));       // *****hello
 console.log(padStrWithAsterisks('helloworld', 10));  // helloworld (already 10)
 console.log(padStrWithAsterisks('hi', 5));          // ***hi
+
+
+
+
+
+
+
+
+
+// 7. RETURN INITIALS OF FULL NAME
+
+function returnInitials(str){
+    return str.split(' ').map(elem => elem[0].toUpperCase()).join('.')
+}
+
+console.log(returnInitials('Smith Anna johnson'))

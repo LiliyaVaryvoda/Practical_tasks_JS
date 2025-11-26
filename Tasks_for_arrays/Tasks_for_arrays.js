@@ -37,6 +37,8 @@ console.log(arrayFlatMap([7, 0, 1]))
 
 
 
+
+
 // 3. FLAT NESTED ARRAY
 function flatNestedArray(arr) {
     const finalArray = arr.flat(Infinity)
@@ -63,6 +65,9 @@ console.log(arrMaxNum([6, 8, 9, 4]))
 
 
 
+
+
+
 // 5. FIND TWO SMALLEST NUMBERS IN ARRAY AND ARRAY SHOUDL BE UNCHANGED
 
 function findSmallest(arr) {
@@ -74,6 +79,9 @@ console.log(findSmallest([6, 4, -6, 8, 2, 1, 5])) //[-6, 1]
 console.log(findSmallest([10, 2, 3])) // [2, 3]
 console.log(findSmallest([])) // []
 console.log(findSmallest([6])) // [6]
+
+
+
 
 
 
@@ -92,6 +100,9 @@ console.log(findLastArrElem(['hello', 'world', '!']))  //!
 
 
 
+
+
+
 // 7. FIND LARGEST ELEMENT IN NESTED ARRAY
 
 function findLargestNested(arr) {
@@ -101,6 +112,10 @@ function findLargestNested(arr) {
 }
 
 console.log(findLargestNested([1, [2, 3], [4, [5, 6]], 7, [8, 9]]))  // 9
+
+
+
+
 
 
 
@@ -126,6 +141,11 @@ console.log(removeFalsyValuesVar1([7, "ate", "", false, 9])); // [7, "ate", 9]
 
 
 
+
+
+
+
+
 // 9. REMOVE ALL FALSY VALUES FROM ARRAY VARIANT 2
 
 function removeFalsyValuesVar2(arr) {
@@ -136,6 +156,9 @@ function removeFalsyValuesVar2(arr) {
 
 
 console.log(removeFalsyValuesVar2([7, "ate", "", false, 9])); // [7, "ate", 9]
+
+
+
 
 
 
@@ -174,6 +197,9 @@ console.log(alternateMerge([10, ""], ['a', 'b', false, 'd']))
 
 
 
+
+
+
 // 11.  GROUP EVEN AND ODDS ELEMENTS FROM ARRAY INTO SEPARATE ARRAYS
 
 function groupArrayNumbers(arr) {
@@ -192,6 +218,9 @@ function groupArrayNumbers(arr) {
 
 console.log(groupArrayNumbers([5, 2, 8, 7, 9, 3, 2, 6]))
 // { arrOdd: [ 5, 7, 9, 3 ], arrEven: [ 2, 8, 2, 6 ] }
+
+
+
 
 
 
@@ -220,6 +249,9 @@ console.log(arrLongestStr(["apple", "banana", "cherry", "date", "elderberry"]))
 
 
 
+
+
+
 // 13. RETURN ARRAY LONGEST STRING ELEMENT VARIANT 2
 
 function arrLongestStrVar2(arr) {
@@ -229,6 +261,8 @@ function arrLongestStrVar2(arr) {
 
 console.log(arrLongestStrVar2(["apple", "banana", "cherry", "date", "elderberry"]))
 // elderberry
+
+
 
 
 
@@ -250,6 +284,9 @@ console.log(findCommon([1, 2, 3, 4, 6, 6], [3, 4, 5, 6]))
 
 
 
+
+
+
 // 15. RETURN UNION OF TWO ARRAYS WITH UNIQUE ELEMENTS
 
 function returnUnion(arr1, arr2) {
@@ -259,6 +296,9 @@ function returnUnion(arr1, arr2) {
 
 console.log(returnUnion([1, 2, 3, 4, 6], [3, 4, 5, 6]))
 //[1, 2, 3, 4, 6, 5]
+
+
+
 
 
 
@@ -277,6 +317,10 @@ console.log(returnArrSum([1, 2, 3, 4, 5])) //15
 
 
 
+
+
+
+
 // 17. CHECK IF ARRAY IS SORTED
 
 function checkArrSorted(arr) {
@@ -289,6 +333,8 @@ function checkArrSorted(arr) {
 console.log(checkArrSorted([10, 5, 6, 7, 4])) //false
 console.log(checkArrSorted([6, 8, 9])) //true
 console.log(checkArrSorted([10, 2, 30])) // false
+
+
 
 
 
@@ -325,6 +371,7 @@ console.log(sortArrayOfObjects([
 
 
 
+
 // 19. RETURN PROPERTIES OF ARRAY OBJECTS BASED ON CONDITION: RETURN NAMES THAT ARE OLDER THAN SOME AGE
 
 function returnUserNames(arr) {
@@ -341,6 +388,8 @@ console.log(returnUserNames([
 ))
 
 // [ 'Bob', 'John' ]
+
+
 
 
 

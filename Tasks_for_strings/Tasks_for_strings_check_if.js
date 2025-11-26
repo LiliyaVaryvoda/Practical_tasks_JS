@@ -17,6 +17,8 @@ console.log(isPalindrome("A man, a plan, a canal: Panama")) // true
 
 
 
+
+
 // 2. CHECK IF TWO STRINGS ARE ANAGRAMS
 
 
@@ -37,6 +39,9 @@ console.log(checkIfAnagram("listen", "hello")); // false
 
 
 
+
+
+
 // 3. CHECK IF ALL CHARACTERS IN STRING ARE UNIQUE
 
 function checkIfUniqueChar(str) {
@@ -46,6 +51,8 @@ function checkIfUniqueChar(str) {
 
 console.log(checkIfUniqueChar('programming')) //false
 console.log(checkIfUniqueChar('hey')) //true
+
+
 
 
 
@@ -84,6 +91,10 @@ console.log(checkVersion('5.4.33', '5.4.3')) // 5.4.33
 
 
 
+
+
+
+
 // 5. CHECK IF SENTENCE IS PANGRAM (CONTAINS EVERY LETTER FROM ALPHABET)
 
 function checkIfPangram(str){
@@ -115,3 +126,64 @@ function checkIfAllVowels(str){
 console.log(checkIfAllVowels('education')) // true
 console.log(checkIfAllVowels('sequoia')) // true
 console.log(checkIfAllVowels('hello'))   // false
+
+
+
+
+
+
+
+
+
+// 7. CHECK IF STRING HAS CONSECUTIVE REPEATING CHARACTERS
+
+function hasConsecutiveRepeatingLetters(str){
+    return /(.)\1/.test(str)
+}
+
+console.log(hasConsecutiveRepeatingLetters("hello")); // true  ('ll')
+console.log(hasConsecutiveRepeatingLetters("world")); // false
+console.log(hasConsecutiveRepeatingLetters("bookkeeper")); // true ('oo', 'kk', 'ee')
+console.log(hasConsecutiveRepeatingLetters("abc")); // false
+
+
+
+
+
+
+
+
+
+// 8. CHECK IF STRING CONTAINS ONLY NUMBERS
+
+function checkStrNum(str){
+    const regex = /^\d+$/
+    return regex.test(str)
+}
+
+
+console.log(checkStrNum('15979')) //true
+console.log(checkStrNum('7j5jv+')) //false
+console.log(checkStrNum('+609+')) //false
+
+
+
+
+
+
+
+
+
+// 9. CHECK IF STRING CONTAINS ONLY LETTERS
+
+
+function checkIfLetters(str){
+    const regex = /^[a-zA-Z ]+$/
+    return regex.test(str)
+}
+
+
+console.log(checkIfLetters('abd1h4')) //false
+console.log(checkIfLetters('abd!h+')) //false
+console.log(checkIfLetters('ababa ababba')) //true
+console.log(checkIfLetters('ababab')) //true

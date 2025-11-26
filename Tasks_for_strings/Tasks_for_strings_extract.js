@@ -41,3 +41,25 @@ function returnVowels(str){
 console.log(returnVowels("Hello World"))
 // 'eoo'
 // 'Hll Wrld'
+
+
+
+
+
+
+
+
+
+// 3. EXTRACT SUBSTRING BETWEEN 2 CHARACTERS
+
+function extractSubstringBetweenChars(str, char1, char2){
+    const char1Index = str.indexOf(char1)
+    const char2Index = str.indexOf(char2, char1Index+1)
+    if (char1Index===-1 || char2Index === -1) return -1
+    return str.slice(char1Index, char2Index+1)
+}
+
+console.log(extractSubstringBetweenChars('hello world', 'd', 'w')) //-1
+console.log(extractSubstringBetweenChars('hello world', 'e', 'w')) //ello w
+console.log(extractSubstringBetweenChars('abcd', '0', 'd')) //-1
+console.log(extractSubstringBetweenChars('cababc', 'a', 'c')) // ababc

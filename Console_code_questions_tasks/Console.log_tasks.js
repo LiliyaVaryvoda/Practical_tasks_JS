@@ -224,3 +224,33 @@ function consoleMultiplicationTable(){
 }
 
 consoleMultiplicationTable()
+
+
+
+
+
+
+
+
+
+
+// RETURN 2D ARRAY MATRIX
+function consoleMatrixArray(rows, columns) {
+    let result = []
+    let counter = 1
+    for (let r = 1; r <= rows; r++) {
+        let row = []
+        for (let c = 1; c <= columns; c++) {
+            row.push(counter)
+            counter++
+        }
+       result.push(row)
+    }
+    return result
+}
+
+console.log(consoleMatrixArray(4, 4))
+// [ 1, 2, 3, 4 ]
+// [ 5, 6, 7, 8 ]
+// [ 9, 10, 11, 12 ]
+// [ 13, 14, 15, 16 ]
