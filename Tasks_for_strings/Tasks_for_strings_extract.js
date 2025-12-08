@@ -63,3 +63,26 @@ console.log(extractSubstringBetweenChars('hello world', 'd', 'w')) //-1
 console.log(extractSubstringBetweenChars('hello world', 'e', 'w')) //ello w
 console.log(extractSubstringBetweenChars('abcd', '0', 'd')) //-1
 console.log(extractSubstringBetweenChars('cababc', 'a', 'c')) // ababc
+
+
+
+
+
+
+
+
+
+
+
+// 4. EXTRACT DOMAIN FROM EMAIL ADDRESS
+
+function extractDomainFromEmail(str){
+    const regex = /^[^\s@]+\@[^\s@]+\.[^\s@]+$/
+    if (!regex.test(str)){return false}
+    const str2 = str.split('@')
+    if (str2.length!==2) { return false}
+    return str2[1]
+}
+
+console.log(extractDomainFromEmail('myname@some-domain.com')) //some-domain.com
+console.log(extractDomainFromEmail('alice.bob-smith@department.company-name.co')) //department.company-name.co

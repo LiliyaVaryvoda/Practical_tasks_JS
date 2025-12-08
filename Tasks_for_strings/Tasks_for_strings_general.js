@@ -78,6 +78,7 @@ console.log(generateRandomStr(11)) // any random for length 11 aka 6YM8OAdctW8
 
 
 
+
 // 5. MASK DIGITS OF PHONE EXCEPT LAST FEW
 
 function maskDigits(str, num){
@@ -139,3 +140,24 @@ function returnInitials(str){
 }
 
 console.log(returnInitials('Smith Anna johnson'))
+
+
+
+
+
+
+
+
+// 8. GENERATE ALL SUBSTRINGS FOR A STRING
+
+function generateSubstringsForStr(str){
+    let allSubStrings = []
+    for (let i = 0; i< str.length; i++){
+        for (let j = i; j< str.length; j++){
+            allSubStrings.push(str.slice(i,j+1))
+        }
+    }
+    return allSubStrings
+}
+
+console.log(generateSubstringsForStr('abc'))

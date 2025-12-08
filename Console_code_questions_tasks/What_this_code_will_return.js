@@ -318,3 +318,56 @@ let fido2 = new Dog2('fido')
 fido2.bark() //fido says woof
 
 
+
+
+
+
+
+
+
+
+// 14.
+
+
+function Car() {
+    drive = function () {
+      console.log("Instance method")
+    }
+  }
+ 
+  const myCar = new Car()
+  //myCar.drive()  // ERROR
+
+
+
+
+function CarFixed() {
+    CarFixed.prototype.drive = function () {
+      console.log("Instance method")
+    }
+  }
+ 
+  const myCarFixed = new CarFixed()
+  myCarFixed.drive()   // Instance method
+
+
+
+
+  function CarFixed2() {
+    this.drive = function () {
+      console.log("Instance method 2")
+    }
+  }
+ 
+  const myCarFixed2 = new CarFixed2()
+  myCarFixed2.drive()   // Instance method 2
+
+
+
+  function CarFixed3() {}
+  CarFixed3.prototype.drive = function () {
+  console.log("Instance method 3")
+}
+
+const myCarFixed3 = new CarFixed3()
+myCarFixed3.drive() // Instance method 3

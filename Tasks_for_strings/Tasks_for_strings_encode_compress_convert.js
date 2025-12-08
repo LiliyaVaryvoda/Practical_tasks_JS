@@ -82,7 +82,7 @@ console.log(convertFromCamelToSnakeCase('version2HTMLParser')) // version2_html_
 
 // 5. CONVERT STRING TO BINARY REPRESENTATION
 
-function convertStrToBinary(str){
+function convertStrToBinary(str) {
     const arrWord = str.split('').map(char => char.charCodeAt(0).toString(2).padStart(8, '0')).join(' ')
     return arrWord
 }
@@ -97,7 +97,7 @@ console.log(convertStrToBinary('Hi')) // 01001000 01101001
 
 // 6. CONVERT BINARY TO NORMAL STRING
 
-function convertBinaryToStr(str){
+function convertBinaryToStr(str) {
     const binaryValue = str.split(' ').map(elem => {
         const decimal = parseInt(elem, 2)
         return String.fromCharCode(decimal)
@@ -117,7 +117,7 @@ console.log(convertBinaryToStr('01001000 01101001')) //"Hi"
 
 // 7. PARSE QUERY STRING TO OBJECT
 
-function parseQueryToObject(str){
+function parseQueryToObject(str) {
     const objParsed = new URLSearchParams(str)
     return Object.fromEntries(objParsed)
 }
@@ -135,9 +135,109 @@ console.log(parseQueryToObject("name=John&age=30&city=Paris")) // { name: 'John'
 
 // 8. ENCODE OBJECT INTO QUERY STRING
 
-function encodeObjIntoQuery(obj){
+function encodeObjIntoQuery(obj) {
     const queryStr = new URLSearchParams(obj).toString()
     return queryStr
 }
 
 console.log(encodeObjIntoQuery({ name: 'John', age: '30', city: 'Paris' })) // name=John&age=30&city=Paris
+
+
+
+
+
+
+
+
+
+// 9. ENCODE STRING USING CAESAR CIPHER
+
+function encodeStrToCaesar(str, number) {
+    let updatedStr = ''
+    for (let char of str) {
+        if (/[a-zA-Z]/.test(char)){
+            let updatedChar=''
+
+            if (char >='a' && char <='z'){
+                updatedChar= String.fromCharCode(char.charCodeAt(0) + number)
+                if (updatedChar.charCodeAt(0)>'z'.charCodeAt(0)){
+                    updatedChar = String.fromCharCode(char.charCodeAt(0) + number -26)
+                    updatedStr += updatedChar
+                }
+                else{
+                    updatedStr += updatedChar
+                }
+            }
+
+            if (char >='A' && char <='Z'){
+                updatedChar= String.fromCharCode(char.charCodeAt(0) + number)
+                if (updatedChar.charCodeAt(0)>'Z'.charCodeAt(0)){
+                    updatedChar = String.fromCharCode(char.charCodeAt(0) + number -26)
+                    updatedStr += updatedChar
+                }
+                else{
+                    updatedStr += updatedChar
+
+                }
+           }
+
+        }
+        else{
+            updatedStr+=char
+        }
+    }
+    return updatedStr
+}
+
+console.log(encodeStrToCaesar('Hello world!z', 4)) // Lipps asvph!d
+
+
+
+
+
+
+
+
+
+
+// DECODE CAESAR CIPHER TO STRING
+
+function decodeCipherToStr(str, number){
+    let finalStr = ''
+    let updatedChar = ''
+    for (let char of str){
+        if (/[a-zA-Z]/.test(char)){
+            if (char.charCodeAt(0)>='a'.charCodeAt(0) && char.charCodeAt(0)<='z'.charCodeAt(0)){
+                let edgeValue = char.charCodeAt(0) - number
+                if (edgeValue <'a'.charCodeAt(0)){
+                    updatedChar=String.fromCharCode(char.charCodeAt(0) -number + 26)
+                    finalStr+=updatedChar
+                }
+                else{
+                    updatedChar=String.fromCharCode(char.charCodeAt(0) -number)
+                    finalStr+=updatedChar
+
+                }
+            }
+
+            if (char.charCodeAt(0)>='A'.charCodeAt(0) && char.charCodeAt(0)<='Z'.charCodeAt(0)){
+                let edgeValue = char.charCodeAt(0) - number
+
+                if (edgeValue <'A'.charCodeAt(0)){
+                    updatedChar=String.fromCharCode(char.charCodeAt(0) -number + 26)
+                    finalStr+=updatedChar
+                }
+                else{
+                    updatedChar=String.fromCharCode(char.charCodeAt(0) -number)
+                    finalStr+=updatedChar
+                }
+            }
+        }
+        else{
+            finalStr+=char
+        }
+    }
+    return finalStr
+}
+
+console.log(decodeCipherToStr('Lipps asvph!d', 4)) // Hello world!z

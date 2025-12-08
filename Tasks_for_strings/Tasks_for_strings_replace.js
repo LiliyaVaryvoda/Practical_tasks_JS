@@ -113,3 +113,4 @@ console.log(checkForASCIIChar("hello"));         // true
 console.log(checkForASCIIChar("123!@#"));        // true
 console.log(checkForASCIIChar("café"));          // false (é is not ASCII)
 console.log(checkForASCIIChar("你好"));           // false (Chinese characters)
+

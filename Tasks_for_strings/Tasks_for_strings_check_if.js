@@ -187,3 +187,29 @@ console.log(checkIfLetters('abd1h4')) //false
 console.log(checkIfLetters('abd!h+')) //false
 console.log(checkIfLetters('ababa ababba')) //true
 console.log(checkIfLetters('ababab')) //true
+
+
+
+
+
+
+
+
+
+// 10. CHECK IF STRING HAS REPEATED PATTERN
+
+function isRepeatingPattern(str){
+    if(str.length<1){return false}
+    let doubledStr = str + str
+    let slicedStr = doubledStr.slice(1, doubledStr.length-1)
+    return slicedStr.includes(str)
+
+}
+
+console.log(isRepeatingPattern("abab"));      // true
+console.log(isRepeatingPattern("abcabcabc")); // true
+console.log(isRepeatingPattern("aba"));       // false
+console.log(isRepeatingPattern("aaaa"));      // true
+console.log(isRepeatingPattern("a"));         // false
+console.log(isRepeatingPattern("a5a5"));         // true
+console.log(isRepeatingPattern("a5a6"));         // false

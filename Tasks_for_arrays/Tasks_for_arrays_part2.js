@@ -1,7 +1,7 @@
 // 1. DIVIDE ARRAY INTO 2 PARTS, FIRST IS LONGER IF ODD
 
 function divideArrayIntoParts(arr) {
-    if (arr.length === 0) return {arr1: [], arr2: []}
+    if (arr.length === 0) return { arr1: [], arr2: [] }
     const middleValue = Math.ceil(arr.length / 2)
     const arr1 = arr.slice(0, middleValue)
     const arr2 = arr.slice(middleValue)
@@ -37,7 +37,7 @@ console.log(returnLargestDifference([6, 1]))           // 5
 
 
 
-// 3. COUNT TRUTHYU AND FALSY VALUES IN ARRAY
+// 3. COUNT TRUTHY AND FALSY VALUES IN ARRAY
 
 function countTruthyFaslyValues(arr) {
     const truthyValuesArr = arr.filter(elem => Boolean(elem))
@@ -168,9 +168,9 @@ console.log(findCommonPrefix(["dog", "dog", "dog"])) //dog
 
 // 8. FIND MISSING NUMBER FROM 1 TO N IN ARRAY
 
-function findMissingNumber(arr, num){
-    const expectedSum =  num*(num+1)/2
-    const actualSum = arr.reduce((acc, current) => acc+ current, 0)
+function findMissingNumber(arr, num) {
+    const expectedSum = num * (num + 1) / 2
+    const actualSum = arr.reduce((acc, current) => acc + current, 0)
     return expectedSum - actualSum
 
 }
@@ -187,8 +187,8 @@ console.log(findMissingNumber([1, 2, 4, 5], 5)) // 3
 
 // 9. FIND INDEX OF ELEMENT IN ARRAY
 
-function findIndexOfElemInArr(arr, elem){
-    return arr.findIndex(e => e===elem)
+function findIndexOfElemInArr(arr, elem) {
+    return arr.findIndex(e => e === elem)
 
 }
 
@@ -205,13 +205,13 @@ console.log(findIndexOfElemInArr(['a', 'b', 'c', 'd', 'e', 'f'], 'n')) //-1
 
 // 10. FIND MINIMUM NUMBER IN ARRAY OF OBJECTS
 
-function findMinimumNumInArr(arr){
+function findMinimumNumInArr(arr) {
     let minMum = Math.min(...arr.map(elem => elem.n))
     let objctMin = arr.find(elem => elem.n === minMum)
     return objctMin
 }
 
-console.log(findMinimumNumInArr([{ n: 6 }, { n: 2 }, {n:5}])) //2
+console.log(findMinimumNumInArr([{ n: 6 }, { n: 2 }, { n: 5 }])) //2
 
 
 
@@ -223,10 +223,10 @@ console.log(findMinimumNumInArr([{ n: 6 }, { n: 2 }, {n:5}])) //2
 
 // 11. REMOVE SPECIFIC VALUES IN-PLACE
 
-function removeValueInPlace(arr, num){
-    for(let i = arr.length-1; i>=0; i--){
+function removeValueInPlace(arr, num) {
+    for (let i = arr.length - 1; i >= 0; i--) {
         console.log(arr[i])
-        if (arr[i] === num){
+        if (arr[i] === num) {
             arr.splice(i, 1)
         }
     }
@@ -247,9 +247,116 @@ console.log(removeValueInPlace([3, 1, 2, 3, 4, 3], 3)) // [ 1, 2, 4 ]
 
 // 12. RETURN NEW ARRAY WITH SQUARED NUMBERS
 
-function squaredNumArr(arr){
+function squaredNumArr(arr) {
     const arr2 = arr.map(elem => Math.pow(elem, 2))
     return arr2
 }
 
-console.log(squaredNumArr([4,6,7,8])) // [ 16, 36, 49, 64 ]
+console.log(squaredNumArr([4, 6, 7, 8])) // [ 16, 36, 49, 64 ]
+
+
+
+
+
+
+
+
+
+
+// 13. PRINT ALL PAIRS IN ARRAY
+
+function returnPairsInArray(arr) {
+    let pairs = []
+    for (let i = 0; i < arr.length; i++) {
+        //console.log(arr[i])
+        for (let j = i + 1; j < arr.length; j++) {
+            pairs.push([arr[i], arr[j]])
+        }
+    }
+    return pairs
+}
+
+console.log(returnPairsInArray([1, 2, 3]))   // [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ]
+
+
+
+
+
+
+
+
+
+
+
+
+// 14. CREATE ARRAY OF OBJECT KEY-VALUE PAIRS
+
+function returnKeyValuePairs(obj) {
+    const objEntries = Object.entries(obj)
+    return objEntries
+}
+
+console.log(returnKeyValuePairs({ a: 1, b: 2, c: 3, d: null })) // [ [ 'a', 1 ], [ 'b', 2 ], [ 'c', 3 ], [ 'd', null ] ]
+
+
+
+
+
+
+
+
+
+
+
+
+// 15. COUNT NUMBERS FREQUENCY IN ARRAY
+
+function countArrNumbersFrequency(arr){
+    const regex = /^[-]?[0-9]+$/
+    let count = 0
+
+    for (let char of arr){
+        if (typeof char=== 'string' || typeof char === 'number'){
+            if (regex.test(char)){
+                count++
+            }
+        }
+        else{
+            continue
+        }
+    }
+    return count
+}
+
+console.log(countArrNumbersFrequency([
+    1, 2, 3, 4, 5, 6,
+    11.5, -12, 0, Infinity, NaN,
+    "hello", true,
+    null, undefined,
+    [1,2], {x:1}, () => 42, Symbol("s"), BigInt(9000)
+  ]
+  ))  // 8  [1,2,3,4,5,6,-12,0]
+
+
+
+
+
+
+
+
+
+
+
+
+// 16. CREATE NEW ARRAY WITH ELEMENTS DOUBLED
+
+function doubleArrElements(arr){
+    const arr2 = arr.map(elem => {
+        return typeof elem === 'number' ?
+            elem*2 : elem
+        
+    })
+    return arr2
+}
+
+console.log(doubleArrElements([1, 2, "hello", null, 3])) // [ 2, 4, 'hello', null, 6 ]
