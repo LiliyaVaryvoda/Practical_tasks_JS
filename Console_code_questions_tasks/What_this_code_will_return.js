@@ -371,3 +371,51 @@ function CarFixed() {
 
 const myCarFixed3 = new CarFixed3()
 myCarFixed3.drive() // Instance method 3
+
+
+
+
+
+
+
+
+
+// 15. Variables shadowing : inner variables have higher proprity than outer variables
+
+
+let x1 = 10;
+
+function test(x1) {  // <-- parameter shadows outer x
+    console.log(x1);
+}
+
+test(99); // prints 99, not 10
+
+
+
+
+
+
+
+
+// 16. 
+
+console.log(0.1 + 0.2 == 0.3) //false
+console.log(0.1 + 0.2 === 0.3) //false
+
+const epsilon = 1*Math.pow(10, -10)
+console.log(Math.abs((0.1+0.2) - 0.3) < epsilon) //true
+
+
+
+
+
+
+
+
+// 17. SLICE() WITH NEGATIVE NUMBER : STRING LENGTH + THIS NEGATIVE INDEX (FOR EXAMPLE 7 -3 = 4 SO FROM 4 TILL END)
+let e = 'abcdefg'
+e = e.slice(-3)
+
+
+console.log(e) // efg

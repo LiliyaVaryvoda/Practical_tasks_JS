@@ -240,3 +240,25 @@ console.log(findMaxValueInObj({
 })) // 1000
 
 console.log(findMaxValueInObj({a:'b', c:'d'}))  // -1
+
+
+
+
+
+
+
+
+
+// 8. ADD PROPERTY TO THE OBJECT WITHOUT MODIFYING THE OBJECT ITSELF
+
+function addProperty(obj, key , value){
+    const copy = JSON.parse(JSON.stringify(obj))
+    copy[key] = value
+    return copy
+}
+
+const user1 = { name: "Alice" };
+const user2 = addProperty(user1, 'age', 30);
+
+console.log(user1); // { name: "Alice" }
+console.log(user2); // { name: "Alice", age: 30 }

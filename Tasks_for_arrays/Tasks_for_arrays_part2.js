@@ -360,3 +360,69 @@ function doubleArrElements(arr){
 }
 
 console.log(doubleArrElements([1, 2, "hello", null, 3])) // [ 2, 4, 'hello', null, 6 ]
+
+
+
+
+
+
+
+
+
+
+// 7. CHUNK ARRAY INTO SMALLER ARRAYS
+
+function chunkArray(arr, size){
+    const updatedArr = []
+    let slicedArr = []
+    for (let i = 0; i < arr.length; i = i+size){
+        console.log('i', i)
+        slicedArr  = arr.slice(i, i+size)
+        console.log(slicedArr)
+        updatedArr.push(slicedArr)
+    }
+    return updatedArr
+}
+
+console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3));
+// Output: [[1, 2, 3], [4, 5, 6], [7]]
+
+
+
+
+
+
+
+
+
+
+// 8. SORT ARRAY OF OBJECTS BY KEY
+
+
+function sortArrofObj(arr){
+    const filteredArrByNames = [...arr].sort((a,b) => a.name.localeCompare(b.name))
+    const filteredArrByAge = [...arr].sort((a,b) => a.age - b.age)
+
+    return [filteredArrByNames, filteredArrByAge]
+}
+
+console.log(sortArrofObj([
+    { id: 1, name: "Alice", age: 28 },
+    { id: 2, name: "Bob", age: 32 },
+    { id: 3, name: "Charlie", age: 25 }
+  ]))
+
+
+
+
+//   [
+//     { id: 1, name: 'Alice', age: 28 },
+//     { id: 2, name: 'Bob', age: 32 },
+//     { id: 3, name: 'Charlie', age: 25 }  // by name
+//   ],
+//   [
+//     { id: 3, name: 'Charlie', age: 25 },
+//     { id: 1, name: 'Alice', age: 28 },
+//     { id: 2, name: 'Bob', age: 32 }   // by age
+//   ]
+// ]

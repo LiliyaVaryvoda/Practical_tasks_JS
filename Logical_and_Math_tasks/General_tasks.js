@@ -181,3 +181,136 @@ console.log(checkIfEmail('hello@email.com')) //true
 console.log(checkIfEmail('helloemail.com')) //false
 console.log(checkIfEmail('hello@email. com')) //false
 console.log(checkIfEmail('hello@emailcom')) //false
+
+
+
+
+
+
+
+
+//7. RETURN RANDOM MUMBER
+
+function returnRandomNumber(start, end){
+    const randomNumber = Math.floor(Math.random() * (end-start+1) + start)
+    return randomNumber
+}
+
+console.log(returnRandomNumber(10, 100))
+
+
+
+
+
+
+
+
+
+// 8. RETURN RANDOM LETTER 
+
+
+function returnRandomLetter(){
+    const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    return alphabet.charAt(Math.floor(Math.random() * alphabet.length))
+}
+
+console.log(returnRandomLetter())
+
+
+
+
+
+
+
+
+
+
+// 9. IMPLEMENT a function that accepts integer and returns a function that can be repeatedly called to return increasing values
+
+function returnIncreasingValue(num){
+    let count = num
+    return function add(){
+        count++
+        return count
+    }
+}
+
+const value = returnIncreasingValue(5)
+console.log(value()) // 6
+console.log(value()) // 7
+console.log(value()) // 8
+
+
+
+
+
+
+
+
+// 10. FIZZBUZZ IMPLEMENTATION
+
+function fizzbuzzImplementation(num){
+    for (let i  = 1; i<=num; i++){
+        if (i%3 ===0 && i%5===0){
+            console.log('fizzbuzz')
+        }
+        else if (i%3 === 0) {
+            console.log('fizz')
+        }
+        else if (i%5 === 0){
+            console.log('buzz')
+        }
+        else{
+            console.log(String(i))
+        }
+    }
+}
+
+fizzbuzzImplementation(25)
+
+
+
+
+
+
+
+
+
+// 11. CONVERT NUMBER TO ROMAN
+
+
+function toRoman(num) {
+    const romanMap = [
+      { value: 1000, symbol: 'M' },
+      { value: 900,  symbol: 'CM' },
+      { value: 500,  symbol: 'D' },
+      { value: 400,  symbol: 'CD' },
+      { value: 100,  symbol: 'C' },
+      { value: 90,   symbol: 'XC' },
+      { value: 50,   symbol: 'L' },
+      { value: 40,   symbol: 'XL' },
+      { value: 10,   symbol: 'X' },
+      { value: 9,    symbol: 'IX' },
+      { value: 5,    symbol: 'V' },
+      { value: 4,    symbol: 'IV' },
+      { value: 1,    symbol: 'I' }
+    ]
+   
+   
+    let result = ''
+   
+   
+    for (let i = 0; i < romanMap.length; i++) {
+      while (num >= romanMap[i].value) {
+        result += romanMap[i].symbol
+        num -= romanMap[i].value
+      }
+    }
+   
+   
+    return result
+   }
+   
+
+console.log(toRoman(15)) // XV
