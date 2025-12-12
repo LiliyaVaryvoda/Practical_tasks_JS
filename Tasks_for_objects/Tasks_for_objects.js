@@ -262,3 +262,58 @@ const user2 = addProperty(user1, 'age', 30);
 
 console.log(user1); // { name: "Alice" }
 console.log(user2); // { name: "Alice", age: 30 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 9.  Object → Regular Function → Arrow Function : NO BINDING NEDED
+
+
+
+const obj0 = {
+    name: "QA",
+    greet: function () {
+        return () => this.name;
+    },
+};
+const greetFn = obj0.greet();
+console.log(greetFn())
+
+// QA
+
+
+
+// Object → Regular Function → Regular Function: NOT WORKING
+const obj1 = {
+    name: "QA",
+    greet() {
+        return function () {   // regular function
+            return this.name;
+        };
+    }
+};
+
+const fn = obj1.greet();
+fn(); // ❌ this is undefined
+
+
+// Object → Arrow Function → Anything: NOT WORKING
+
+
+const obj2 = {
+    name: "QA",
+    greet: () => {  // ❌ arrow function as method — bad undefined
+        return this.name;
+    }
+};
+
+

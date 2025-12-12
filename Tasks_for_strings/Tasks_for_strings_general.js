@@ -161,3 +161,21 @@ function generateSubstringsForStr(str){
 }
 
 console.log(generateSubstringsForStr('abc'))
+
+
+
+
+
+
+
+
+
+
+
+
+// 9. SLICE() WITH NEGATIVE NUMBER : STRING LENGTH + THIS NEGATIVE INDEX (FOR EXAMPLE 7 -3 = 4 SO FROM 4 TILL END)
+let e = 'abcdefg'
+e = e.slice(-3)
+
+
+console.log(e) // efg

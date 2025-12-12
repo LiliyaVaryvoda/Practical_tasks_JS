@@ -277,40 +277,56 @@ fizzbuzzImplementation(25)
 
 
 
-// 11. CONVERT NUMBER TO ROMAN
 
 
-function toRoman(num) {
-    const romanMap = [
-      { value: 1000, symbol: 'M' },
-      { value: 900,  symbol: 'CM' },
-      { value: 500,  symbol: 'D' },
-      { value: 400,  symbol: 'CD' },
-      { value: 100,  symbol: 'C' },
-      { value: 90,   symbol: 'XC' },
-      { value: 50,   symbol: 'L' },
-      { value: 40,   symbol: 'XL' },
-      { value: 10,   symbol: 'X' },
-      { value: 9,    symbol: 'IX' },
-      { value: 5,    symbol: 'V' },
-      { value: 4,    symbol: 'IV' },
-      { value: 1,    symbol: 'I' }
-    ]
-   
-   
-    let result = ''
-   
-   
-    for (let i = 0; i < romanMap.length; i++) {
-      while (num >= romanMap[i].value) {
-        result += romanMap[i].symbol
-        num -= romanMap[i].value
-      }
-    }
-   
-   
-    return result
-   }
-   
 
-console.log(toRoman(15)) // XV
+// 11. Date object with NaN time (In browser, it will be undefined)
+
+console.log(new Date('not a date')) // Invalid Date
+
+
+
+
+
+
+
+
+
+
+
+
+// 12. RETURN WILL RETURN LAST VALUE IF THERE ARE FEW
+
+function returnValue(a, b) {
+    return a, b
+}
+
+console.log(returnValue(1, 2)); //2
+
+
+
+
+
+
+
+
+
+
+
+// 13. WHAT WILL IIFE RETURN : b = 5 will become global variable and avaliable, var a = b -> function scoped in IIFE and disappear after finishing (Error)
+
+
+(function () {
+    var a = b = 5
+})()
+// console.log(a) // Error : a is not defined, error in strict mode
+console.log(b) // 5 for non-srict mode, error b is not defined in strict mode
+
+
+// In regular function, function scoped var is not visible outside
+function regularVar() {
+    var a = b = 5
+}
+
+//console.log(a) //Error a is not defined, erro in strict mode
+console.log(b) // 5 for non-strict mode, error in strict mode

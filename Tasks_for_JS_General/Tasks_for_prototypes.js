@@ -205,3 +205,100 @@ console.log(userAdmin.sayHi())
 
   const userUser = new Person1('User')
   console.log(userUser.sayHi()) // Hi user
+
+
+
+
+
+
+
+
+
+
+// 10.
+
+function Car() {
+  drive = function () {
+    console.log("Instance method")
+  }
+}
+
+const myCar = new Car()
+//myCar.drive()  // ERROR
+
+
+
+
+function CarFixed() {
+  CarFixed.prototype.drive = function () {
+    console.log("Instance method")
+  }
+}
+
+const myCarFixed = new CarFixed()
+myCarFixed.drive()   // Instance method
+
+
+
+
+function CarFixed2() {
+  this.drive = function () {
+    console.log("Instance method 2")
+  }
+}
+
+const myCarFixed2 = new CarFixed2()
+myCarFixed2.drive()   // Instance method 2
+
+
+
+function CarFixed3() {}
+CarFixed3.prototype.drive = function () {
+console.log("Instance method 3")
+}
+
+const myCarFixed3 = new CarFixed3()
+myCarFixed3.drive() // In
+
+
+
+
+
+
+
+
+
+
+
+// 11. FUNCTION ADDED TO CONSTRUCTOR FUNCTION, NOT TO INSTANCE
+
+
+// function Dog(name) {
+//     this.name = name
+// }
+// Dog.bark = function () {
+//     console.log(this.name + ' says woof')
+// }
+// let fido = new Dog('fido')
+// fido.bark() //ERROR
+
+
+
+function Dog1(name) {
+  this.name = name
+}
+Dog1.bark = function () {
+  console.log(this.name + ' says woof')
+}
+console.log(Dog1.bark()) // Dog1 says woof
+
+
+
+function Dog2(name) {
+  this.name = name
+}
+Dog2.prototype.bark = function () {
+  console.log(this.name + ' says woof')
+}
+let fido2 = new Dog2('fido')
+fido2.bark() //fido says woof
