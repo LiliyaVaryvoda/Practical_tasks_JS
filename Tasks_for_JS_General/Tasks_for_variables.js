@@ -140,4 +140,3 @@ let x = 0;
 function f() { console.log(x); }
 x = 2;
 f() //2
-

@@ -215,7 +215,7 @@ console.log(userAdmin.sayHi())
 
 
 
-// 10.
+// 10. Create prototype method
 
 function Car() {
   drive = function () {
@@ -236,7 +236,7 @@ function CarFixed() {
 }
 
 const myCarFixed = new CarFixed()
-myCarFixed.drive()   // Instance method
+myCarFixed.drive()   // Instance method but not recommended as it will reassign the same method on every contructor call - so it can be mutated inside constructor
 
 
 
@@ -248,7 +248,7 @@ function CarFixed2() {
 }
 
 const myCarFixed2 = new CarFixed2()
-myCarFixed2.drive()   // Instance method 2
+myCarFixed2.drive()   // Instance method 2 but not recommended as it will create a copy of this function for all instances
 
 
 
@@ -258,7 +258,7 @@ console.log("Instance method 3")
 }
 
 const myCarFixed3 = new CarFixed3()
-myCarFixed3.drive() // In
+myCarFixed3.drive() // Instance methos 3 - recommended
 
 
 
@@ -279,8 +279,9 @@ myCarFixed3.drive() // In
 // Dog.bark = function () {
 //     console.log(this.name + ' says woof')
 // }
+
 // let fido = new Dog('fido')
-// fido.bark() //ERROR
+// fido.bark() //ERROR as static method called on instance
 
 
 
@@ -290,8 +291,7 @@ function Dog1(name) {
 Dog1.bark = function () {
   console.log(this.name + ' says woof')
 }
-console.log(Dog1.bark()) // Dog1 says woof
-
+console.log(Dog1.bark()) // Dog1 says woof because this is method called on constructor
 
 
 function Dog2(name) {

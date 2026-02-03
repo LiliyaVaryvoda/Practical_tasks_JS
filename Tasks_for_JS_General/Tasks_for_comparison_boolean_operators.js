@@ -1,4 +1,4 @@
-//SHORT CIRCUIT
+// 1. SHORT CIRCUIT
 
 function getName(name) {
     return name || "Guest";
@@ -10,7 +10,15 @@ console.log(getName(null)) // Guest
 console.log(getName(undefined)) //Guest
 
 
-// NULISH OPERATOR
+
+
+
+
+
+
+
+
+// 2. NULISH OPERATOR
 console.log(null ?? "default"); // "default"
 
 
@@ -22,7 +30,15 @@ console.log('' ?? "default");  // ''
 
 
 
-// LOGICAL AND / OR
+
+
+
+
+
+
+
+
+// 3. LOGICAL AND / OR
 console.log(false && true || false) //false
 
 console.log(true && false || true) // true
@@ -76,7 +92,7 @@ console.log((false||0)) // 0
 
 
 
-
+// 4. Not-strict and strict comparisons
 
 console.log(0 == 0) //true
 console.log(0 === 0) // true
@@ -114,6 +130,7 @@ console.log("" == false) // true -> '' becomes 0 and false becomes 0
 console.log("" == 0) // true   -> '' becomes 0
 
 
+console.log(['2'] == 2) // true   ->  as array converted to promitive, ['2'] becomes '2' and then sting converted to number so it will be 2  == 2
 
 
 
@@ -126,7 +143,7 @@ console.log("" == 0) // true   -> '' becomes 0
 
 
 
-// 3. NON STRICT COMPARISON CONVERT ARRAY VALUE TO PRIMITIVE
+// 5. NON STRICT COMPARISON CONVERT ARRAY VALUE TO PRIMITIVE
 
 function isBig(thing) {
     if (thing == 0 || thing == 1 || thing == 2) {
@@ -147,15 +164,38 @@ console.log(isBig([3]))  // true
 
 
 
-// 1. TRUTHY VALUES
+
+
+// 6. TRUTHY VALUES
 console.log(Boolean("0")) // true
 console.log(Boolean([])) // true
 console.log(Boolean([''])) // true
 console.log(Boolean({})) // true
 
 
-// FALSY VALUES
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 7.FALSY VALUES
+// There are 8 falsy values in JS, everything else is truthy
 console.log(Boolean(0)) // false
+console.log(Boolean(-0)) // false
+console.log(Boolean(null)) // false
+console.log(Boolean(undefined)) // false
+console.log(Boolean(NaN)) // false
+console.log(Boolean('')) // false
+console.log(Boolean(false)) // false
+console.log(Boolean(0n)) // false
 
 
 
@@ -169,7 +209,8 @@ console.log(Boolean(0)) // false
 
 
 
-// 2. STRICT AND NON STRICT COMPARISON + TRUTHY AND FALSY VALUES
+
+// 8. STRICT AND NON STRICT COMPARISON + TRUTHY AND FALSY VALUES
 
 const item = 1
 
@@ -177,11 +218,11 @@ const item = 1
 if (item === true) {
     console.log('Item is true');
 } else {
-    console.log('Item is false');
+    console.log('Item is false'); // 'Item is false' as it is strict comparison
 }
 
 if (item == true) {
-    console.log('Item is true!');
+    console.log('Item is true!'); // 'Item is true' as it is not strict comparison so true will become 1
 } else {
     console.log('Item is false!');
 }
@@ -189,31 +230,35 @@ if (item == true) {
 
 
 if (item) {
-    console.log('Any');
+    console.log('Any'); // 'Any' because item is truthy
 }
 
-// Item is false'
-// 'Item is true!'
-// 'Any'
 
 
+
+
+
+
+
+
+
+
+// 9. STRICT AND NON STRICT COMPARISON + TRUTHY AND FALSY VALUES
+// for strict comparison ,there is no type coercion
 
 const obj = "0"
 
 
 if (obj) {
-    console.log("Object is truthy");
+    console.log("Object is truthy");  // "Object is truthy" as it is not empty string and not number 0
 }
 
 
 if (obj == false) {
-    console.log("Object is equal to false");
+    console.log("Object is equal to false"); // "Object is equal to false" as '0' will be 0 and false will be 0 and it is not strict comparison
 }
 if (obj === false) {
     console.log("No");
 }
-
-// "Object is truthy"
-// "Object is equal to false"
 
 

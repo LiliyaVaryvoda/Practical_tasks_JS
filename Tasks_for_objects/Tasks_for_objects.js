@@ -317,3 +317,26 @@ const obj2 = {
 };
 
 
+
+
+
+
+
+
+
+
+// 10. Create object to calculate the area and perimeter of a rectangle. Add properties width and height and methods getArea() and getperimeter()
+
+const objectRectangle = {
+    width: 10,
+    height: 20,
+    getArea() {
+        return this.width * this.height
+    },
+    getPerimeter(){
+        return 2 * (this.width  + this.height)
+    }
+}
+
+console.log(objectRectangle.getArea())
+console.log(objectRectangle.getPerimeter())

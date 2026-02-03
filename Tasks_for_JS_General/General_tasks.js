@@ -313,20 +313,44 @@ console.log(returnValue(1, 2)); //2
 
 
 
-// 13. WHAT WILL IIFE RETURN : b = 5 will become global variable and avaliable, var a = b -> function scoped in IIFE and disappear after finishing (Error)
+// 13. Level is rising by 1.5 m per year; write function that displays number during and for 25 years
+
+function levelRise(num, year){
+    let currentLevel = 0
+    for (let i = 1; i<= year; i++){
+        currentLevel += num
+        console.log(`Current level for ${i} year : ${currentLevel}`)
+    }
+    return currentLevel
+}
+
+console.log(levelRise(1.5, 25));
+
+
+
+
+
+
+
+
+
+
+
+
+// 14. WHAT WILL IIFE RETURN : b = 5 will become global variable and avaliable, var a = b -> function scoped in IIFE and disappear after finishing (Error)
 
 
 (function () {
     var a = b = 5
-})()
-// console.log(a) // Error : a is not defined, error in strict mode
-console.log(b) // 5 for non-srict mode, error b is not defined in strict mode
-
-
-// In regular function, function scoped var is not visible outside
-function regularVar() {
+  })()
+  // console.log(a) // Error : a is not defined, error in strict mode
+  console.log(b) // 5 for non-srict mode, error b is not defined in strict mode
+  
+  
+  // In regular function, function scoped var is not visible outside
+  function regularVar() {
     var a = b = 5
-}
-
-//console.log(a) //Error a is not defined, erro in strict mode
-console.log(b) // 5 for non-strict mode, error in strict mode
+  }
+  
+  //console.log(a) //Error a is not defined, erro in strict mode
+  console.log(b) // 5 for non-strict mode, error in strict mode
