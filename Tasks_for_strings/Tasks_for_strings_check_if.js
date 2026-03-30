@@ -155,6 +155,7 @@ console.log(hasConsecutiveRepeatingLetters("abc")); // false
 
 
 // 8. CHECK IF STRING CONTAINS ONLY NUMBERS
+// Write a regex from start to end only numbers and use .test()
 
 function checkStrNum(str){
     const regex = /^\d+$/
@@ -175,7 +176,7 @@ console.log(checkStrNum('+609+')) //false
 
 
 // 9. CHECK IF STRING CONTAINS ONLY LETTERS
-
+// Write a regex that from start to end only letters and spaces and use .test() method
 
 function checkIfLetters(str){
     const regex = /^[a-zA-Z ]+$/
@@ -197,7 +198,7 @@ console.log(checkIfLetters('ababab')) //true
 
 
 // 10. CHECK IF STRING HAS REPEATED PATTERN
-
+// DOuble the string, remove forst and last characters and check if it includes original string
 function isRepeatingPattern(str){
     if(str.length<1){return false}
     let doubledStr = str + str
