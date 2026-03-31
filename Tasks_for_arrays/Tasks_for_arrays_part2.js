@@ -1,5 +1,5 @@
 // 1. DIVIDE ARRAY INTO 2 PARTS, FIRST IS LONGER IF ODD
-
+// Find Math.ceil(middleValue), then .slice()
 function divideArrayIntoParts(arr) {
     if (arr.length === 0) return { arr1: [], arr2: [] }
     const middleValue = Math.ceil(arr.length / 2)
@@ -19,8 +19,9 @@ console.log(divideArrayIntoParts([0])) // { arr1: [ 0 ], arr2: [] }
 
 
 
-// 2. RETURN LARGEST DIFFERENCE BETWEEN TWO NUMBERS IN ARRAY
 
+// 2. RETURN LARGEST DIFFERENCE BETWEEN TWO NUMBERS IN ARRAY
+// Math.max - Math.min
 function returnLargestDifference(arr) {
     return Math.max(...arr) - Math.min(...arr)
 }
@@ -37,8 +38,9 @@ console.log(returnLargestDifference([6, 1]))           // 5
 
 
 
-// 3. COUNT TRUTHY AND FALSY VALUES IN ARRAY
 
+// 3. COUNT TRUTHY AND FALSY VALUES IN ARRAY
+// .filter(Boolean)
 function countTruthyFaslyValues(arr) {
     const truthyValuesArr = arr.filter(elem => Boolean(elem))
     return { truthyValuesArr: truthyValuesArr.length, falsyValuesArr: arr.length - truthyValuesArr.length }
@@ -54,8 +56,10 @@ console.log(countTruthyFaslyValues([0, 1, "", "hello", null, undefined, [], {}, 
 
 
 
-//  4. MOVE NUMBER 0 TO THE END OR ARRAY
 
+
+//  4. MOVE NUMBER 0 TO THE END OR ARRAY
+// Filter arrays and then combine them
 function moveDigitsInArray(arr) {
     const arr1 = arr.filter(elem => elem !== 0)
     const arr2 = arr.filter(elem => elem === 0)
@@ -71,19 +75,49 @@ console.log(moveDigitsInArray([0, 6, 3, 'hello', 0, 5, 'world']))  //[ 6, 3, 'he
 
 
 
-// 5. FIND PEAK ELEMENTS IN ARRAY
 
-function returnPeakElements(arr) {
-    let peakValues = []
-    if (arr.length === 0) return []
-    if (arr.length === 1 && typeof arr[0] === 'number') return arr
-    for (let i = 0; i < arr.length; i++) {
-        if (typeof arr[i] !== 'number') continue
-        let prevValue = (i === 0 || typeof arr[i - 1] !== 'number') ? -Infinity : arr[i - 1]
-        let nextValue = (i === arr.length - 1 || typeof arr[i + 1] !== 'number') ? -Infinity : arr[i + 1]
-        if (arr[i] > prevValue && arr[i] > nextValue) peakValues.push(arr[i])
+
+
+//  5. MOVE NUMBER 0 TO THE END OR ARRAY 
+// VARIANT 2
+// Loop array and swap places by moving current elements at the beginning and those at the beginning to the current by swiping [,] = [,] and incrementing index
+function moveDigitsInArray(arr) {
+    let index = 0
+    for (let i = 0 ; i< arr.length; i++){
+        if (arr[i] !== 0){
+            [[arr[i], arr[index]] = [arr[index], arr[i]]]
+            index++
+        }
     }
-    return peakValues
+    return arr
+}
+
+console.log(moveDigitsInArray([0, 6, 3, 'hello', 0, 5, 'world']))  //[ 6, 3, 'hello', 5, 'world', 0, 0 ]
+
+
+
+
+
+
+
+
+
+
+// 6. FIND PEAK ELEMENTS IN ARRAY
+// Loop through array, skip not numbers,  select previous and next values, if they are numbers, use them, if not, use -Infinity and compare
+function returnPeakElements(arr) {
+    let peakElements = []
+    for (let i = 0 ; i < arr.length; i++){
+        if (typeof(arr[i]) !== "number") continue
+        let prevElem = arr[i-1]
+        prevElem = typeof(prevElem)==="number"?  arr[i-1] : -Infinity
+        let nextElem = arr[i+1]
+        nextElem= typeof (nextElem) === "number"? arr[i+1]: -Infinity
+        if (arr[i] > prevElem&& arr[i] > nextElem){
+            peakElements.push(arr[i])
+        }
+    }
+    return peakElements
 }
 
 console.log(returnPeakElements([1, 3, 2, 5, 4])) // [ 3, 5 ]
@@ -104,9 +138,8 @@ console.log(returnPeakElements([1, 'hello', 5, 3, null, 10, 2])) // [1, 5, 10]
 
 
 
-
-// 6. FIND THE MAJORITY ELEMENT IN ARRAY
-
+// 7. FIND THE MAJORITY ELEMENT IN ARRAY
+// Use for of loop and Map(); then check if occurencies > array length/2
 function findMajorityElement(arr) {
     let mapOccurencies = new Map()
     for (let elem of arr) {
@@ -137,22 +170,18 @@ console.log(findMajorityElement([1, 2, 3, 4])) // No majority element
 
 
 
-// 7. FIND COMMON PREFIX IN ARRAY OF WORDS
-
+// 8. FIND COMMON PREFIX IN ARRAY OF WORDS
+// Loop through first word, then loop though array words, if there is mismatch return prefix or -1, if not mismatches, after looping words add prefix to variable, return variable at the end of function
 function findCommonPrefix(arr) {
-
+    const firstWord = arr[0]
     let commonPrefix = ''
-    let firstWord = arr[0]
-
-    for (let char = 0; char < firstWord.length; char++) {
-
-        for (let word = 1; word < arr.length; word++) {
-
-            if (firstWord[char] !== arr[word][char]) return commonPrefix || -1
+    for (let i = 0 ; i< firstWord.length; i++){
+        for (let word = 1; word < arr.length; word++){
+            if (!arr[word][i] || arr[word][i] !== firstWord[i]) {return commonPrefix || -1}
         }
-        commonPrefix += firstWord[char]
+        commonPrefix+=firstWord[i]
     }
-    return commonPrefix
+return commonPrefix
 }
 
 console.log(findCommonPrefix(["flower", "flow", "flight"])) // fl
@@ -166,7 +195,7 @@ console.log(findCommonPrefix(["dog", "dog", "dog"])) //dog
 
 
 
-// 8. FIND MISSING NUMBER FROM 1 TO N IN ARRAY
+// 9. FIND MISSING NUMBER FROM 1 TO N IN ARRAY
 
 function findMissingNumber(arr, num) {
     const expectedSum = num * (num + 1) / 2
@@ -185,8 +214,8 @@ console.log(findMissingNumber([1, 2, 4, 5], 5)) // 3
 
 
 
-// 9. FIND INDEX OF ELEMENT IN ARRAY
-
+// 10. FIND INDEX OF ELEMENT IN ARRAY
+// Use .findIndex() ; this function expects callback (elem => elem === elementSearch)
 function findIndexOfElemInArr(arr, elem) {
     return arr.findIndex(e => e === elem)
 
@@ -203,15 +232,15 @@ console.log(findIndexOfElemInArr(['a', 'b', 'c', 'd', 'e', 'f'], 'n')) //-1
 
 
 
-// 10. FIND MINIMUM NUMBER IN ARRAY OF OBJECTS
 
+// 11. FIND MINIMUM NUMBER IN ARRAY OF OBJECTS
+// use flatMap() and filter() by type and Math.min()
 function findMinimumNumInArr(arr) {
-    let minMum = Math.min(...arr.map(elem => elem.n))
-    let objctMin = arr.find(elem => elem.n === minMum)
-    return objctMin
+    const arrValues = arr.flatMap(elem => Object.values(elem).filter(elem => typeof elem === 'number'))
+    return Math.min(...arrValues)
 }
 
-console.log(findMinimumNumInArr([{ n: 6 }, { n: 2 }, { n: 5 }])) //2
+console.log(findMinimumNumInArr([{ n: 6 }, { c: 2 }, { n: 5 }, {k:'hello'}])) //2
 
 
 
@@ -221,11 +250,10 @@ console.log(findMinimumNumInArr([{ n: 6 }, { n: 2 }, { n: 5 }])) //2
 
 
 
-// 11. REMOVE SPECIFIC VALUES IN-PLACE
-
+// 12. REMOVE SPECIFIC VALUES IN-PLACE
+// Loop through array backwards, then use .splice(index, deleteCount)
 function removeValueInPlace(arr, num) {
     for (let i = arr.length - 1; i >= 0; i--) {
-        console.log(arr[i])
         if (arr[i] === num) {
             arr.splice(i, 1)
         }
@@ -245,8 +273,8 @@ console.log(removeValueInPlace([3, 1, 2, 3, 4, 3], 3)) // [ 1, 2, 4 ]
 
 
 
-// 12. RETURN NEW ARRAY WITH SQUARED NUMBERS
-
+// 13. RETURN NEW ARRAY WITH SQUARED NUMBERS
+// Use .map()
 function squaredNumArr(arr) {
     const arr2 = arr.map(elem => Math.pow(elem, 2))
     return arr2
@@ -263,7 +291,7 @@ console.log(squaredNumArr([4, 6, 7, 8])) // [ 16, 36, 49, 64 ]
 
 
 
-// 13. PRINT ALL PAIRS IN ARRAY
+// 14. PRINT ALL PAIRS IN ARRAY
 
 function returnPairsInArray(arr) {
     let pairs = []
@@ -289,8 +317,8 @@ console.log(returnPairsInArray([1, 2, 3]))   // [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ]
 
 
 
-// 14. CREATE ARRAY OF OBJECT KEY-VALUE PAIRS
-
+// 15. CREATE ARRAY OF OBJECT KEY-VALUE PAIRS
+// Use Object.entries()
 function returnKeyValuePairs(obj) {
     const objEntries = Object.entries(obj)
     return objEntries
@@ -309,23 +337,11 @@ console.log(returnKeyValuePairs({ a: 1, b: 2, c: 3, d: null })) // [ [ 'a', 1 ],
 
 
 
-// 15. COUNT NUMBERS FREQUENCY IN ARRAY
 
+// 16. COUNT NUMBERS FREQUENCY IN ARRAY
+// .filter() by Number.isFinite()
 function countArrNumbersFrequency(arr){
-    const regex = /^[-]?[0-9]+$/
-    let count = 0
-
-    for (let char of arr){
-        if (typeof char=== 'string' || typeof char === 'number'){
-            if (regex.test(char)){
-                count++
-            }
-        }
-        else{
-            continue
-        }
-    }
-    return count
+return arr.filter(elem => Number.isFinite(elem))
 }
 
 console.log(countArrNumbersFrequency([
@@ -335,7 +351,12 @@ console.log(countArrNumbersFrequency([
     null, undefined,
     [1,2], {x:1}, () => 42, Symbol("s"), BigInt(9000)
   ]
-  ))  // 8  [1,2,3,4,5,6,-12,0]
+  ))
+//   [
+//   1, 2,    3,   4,
+//   5, 6, 11.5, -12,
+//   0
+// ]
 
 
 
@@ -346,10 +367,8 @@ console.log(countArrNumbersFrequency([
 
 
 
-
-
-// 16. CREATE NEW ARRAY WITH ELEMENTS DOUBLED
-
+// 17. CREATE NEW ARRAY WITH ELEMENTS DOUBLED
+// use .map() and check if type if number, if yes, return doubled, if no, return element
 function doubleArrElements(arr){
     const arr2 = arr.map(elem => {
         return typeof elem === 'number' ?
@@ -370,7 +389,7 @@ console.log(doubleArrElements([1, 2, "hello", null, 3])) // [ 2, 4, 'hello', nul
 
 
 
-// 7. CHUNK ARRAY INTO SMALLER ARRAYS
+// 18. CHUNK ARRAY INTO SMALLER ARRAYS
 
 function chunkArray(arr, size){
     const updatedArr = []
@@ -396,7 +415,7 @@ console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3));
 
 
 
-// 8. SORT ARRAY OF OBJECTS BY KEY
+// 19. SORT ARRAY OF OBJECTS BY KEY
 
 
 function sortArrofObj(arr){
