@@ -1,31 +1,26 @@
 // 1. CHECK IF BALANCED BRACKETS
-
+// Create object with key-values for opening and closing brackets, loop through string and add opening brackets into temporary aray
+// Then if there is closing bracket, use .pop() to have last opening bracket and compare them using key-values
+// If not pair, false, if start from closing bracket false, if in the end length is > 0 , false
 function checkIfBalancedBrackets(str) {
-    let stack = []
-    let pairs = {
-        '}':'{',
-        ']' : '[',
-        ')' :'('
+    const pairs = {
+        '{' : '}',
+        '[' : ']',
+        '(' : ')'
     }
-
-    for (let char of str){
-        if (char === '(' || char === '[' || char === '{'){
-            stack.push(char)
+    let balancedBrackets = []
+    for (let elem of str){
+        if(elem === '(' || elem === '{' || elem=== '['){
+            balancedBrackets.push(elem)
+        }
+        if (elem === ')' || elem === '}' || elem ===']'){
+            if (balancedBrackets.length===0) { return false}
+            let lastValue = balancedBrackets.pop()
+            if (elem !== pairs[lastValue]){return false}
         }
 
-        if (char === ')' || char === ']' || char === '}'){
-            if (stack.length===0) {return false}
-
-            let removedChar = stack.pop()
-
-            if (removedChar!==pairs[char]){
-                return false
-            }
-        }
     }
-
-    if (stack.length!==0) return false
-    return true
+    return balancedBrackets.length===0? true: false
 }
 
 console.log(checkIfBalancedBrackets('(hello))')) // false
@@ -33,7 +28,9 @@ console.log(checkIfBalancedBrackets('(hello))(')) // false
 console.log(checkIfBalancedBrackets('(((hello)))()')) // true
 console.log(checkIfBalancedBrackets(")("));       // false
 console.log(checkIfBalancedBrackets("(()"));      // false
-console.log(checkIfBalancedBrackets("([)]"));      // false
+console.log(checkIfBalancedBrackets("([)"));      // false
+console.log(checkIfBalancedBrackets("([])"));      // true
+console.log(checkIfBalancedBrackets(")"));      // false
 
 
 

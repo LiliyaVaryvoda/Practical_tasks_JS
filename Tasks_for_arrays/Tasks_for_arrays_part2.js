@@ -196,16 +196,23 @@ console.log(findCommonPrefix(["dog", "dog", "dog"])) //dog
 
 
 // 9. FIND MISSING NUMBER FROM 1 TO N IN ARRAY
-
+// Create a set from array, loop through array from 1 to n and check if set has it, if no, it is missing
 function findMissingNumber(arr, num) {
-    const expectedSum = num * (num + 1) / 2
-    const actualSum = arr.reduce((acc, current) => acc + current, 0)
-    return expectedSum - actualSum
-
+    let missingNums = []
+    const uniqueArray = new Set(arr)
+    for (let i = 1; i<=num; i++){
+        if (!uniqueArray.has(i)){
+            missingNums.push(i)
+        }
+    }
+    return missingNums
 }
 
 console.log(findMissingNumber([1, 3, 4, 6, 2, 7, 8, 9], 9)) //5
 console.log(findMissingNumber([1, 2, 4, 5], 5)) // 3
+console.log(findMissingNumber([1, 2, 4, 5, 6, 9], 9)) // 3, 7 , 8
+
+
 
 
 
@@ -292,11 +299,10 @@ console.log(squaredNumArr([4, 6, 7, 8])) // [ 16, 36, 49, 64 ]
 
 
 // 14. PRINT ALL PAIRS IN ARRAY
-
+// Use outer loop for first value start from 0, and inner loop for second value start from outer increment + 1; then push both values
 function returnPairsInArray(arr) {
     let pairs = []
     for (let i = 0; i < arr.length; i++) {
-        //console.log(arr[i])
         for (let j = i + 1; j < arr.length; j++) {
             pairs.push([arr[i], arr[j]])
         }
@@ -389,16 +395,13 @@ console.log(doubleArrElements([1, 2, "hello", null, 3])) // [ 2, 4, 'hello', nul
 
 
 
-// 18. CHUNK ARRAY INTO SMALLER ARRAYS
 
+// 18. CHUNK ARRAY INTO SMALLER ARRAYS
+// LOop through array, then increment i with stepSize, in loop use .slice() with iterator as start and iterator with stepSize as end 
 function chunkArray(arr, size){
-    const updatedArr = []
-    let slicedArr = []
-    for (let i = 0; i < arr.length; i = i+size){
-        console.log('i', i)
-        slicedArr  = arr.slice(i, i+size)
-        console.log(slicedArr)
-        updatedArr.push(slicedArr)
+    let updatedArr = []
+    for (let i = 0 ; i < arr.length; i = i+size){
+        updatedArr.push(arr.slice(i, i+size))
     }
     return updatedArr
 }
@@ -416,8 +419,7 @@ console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3));
 
 
 // 19. SORT ARRAY OF OBJECTS BY KEY
-
-
+// Use sort() and localeCompare() for comparing words 
 function sortArrofObj(arr){
     const filteredArrByNames = [...arr].sort((a,b) => a.name.localeCompare(b.name))
     const filteredArrByAge = [...arr].sort((a,b) => a.age - b.age)
