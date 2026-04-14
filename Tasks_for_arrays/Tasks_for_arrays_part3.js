@@ -66,3 +66,18 @@ function checkArrPallindrom(arr){
 
 console.log(checkArrPallindrom([1,2,3,2,1])) // true
 console.log(checkArrPallindrom([1,2,3,4,5])) // false
+
+
+
+
+
+
+
+// 4. Return the sum of all digits of array elements
+
+function returnSumOfDigitsInArr(arr) {
+    return arr.join('').split('').reduce((acc, cur) => acc + Number(cur), 0)
+}
+
+
+console.log(returnSum([22, 555, 67]))

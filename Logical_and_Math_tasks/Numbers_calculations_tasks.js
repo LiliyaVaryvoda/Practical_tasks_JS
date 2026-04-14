@@ -41,18 +41,20 @@ console.log(countPrimeNumbers(1, 100))
 
 
 
+
+
 // 2. CHECK IF NUMBER IS AMSTRONG NUMBER
-
+// AMSTRONG is number when sum of each number ^ n = the number itself like number 153 is amstrong because 1**3 + 5**3 + 3**3 = 153
+// Find string number lenght, loop through string number and for each number element power to atring number lenght; then compare final to function number
 function checkArmstrongNum(num){
-    if (num < 0) return false
-    const digits = String(num)
-    const power = digits.length
-    let result = 0
-    for(let digit of digits){
-        result += Number(digit) ** power
+    if (num<=0) return false
+    const numLength = String(num).length
+    let numMultiplied  =  0
+    for (let elem of String(num)){
+        let digit = Number(elem) ** numLength
+        numMultiplied+=digit
     }
-    return num === result
-
+    return numMultiplied === num
 }
 
 console.log(checkArmstrongNum(153)) // true

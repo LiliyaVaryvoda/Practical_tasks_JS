@@ -116,3 +116,103 @@ async function createTestUsers() {
 
 
 //createTestUsers();
+
+
+
+
+
+
+
+
+// 5. What will be the output
+
+console.log('Start');
+
+setTimeout(() => {
+  console.log('Timeout');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise');
+});
+
+console.log('End');
+
+// Start
+// End
+// Promose
+// Timeout
+
+
+
+
+
+
+
+
+
+
+// 6. What will be the output
+
+setTimeout(() => console.log('A'), 0);
+
+Promise.resolve()
+  .then(() => console.log('B'))
+  .then(() => console.log('C'));
+
+console.log('D');
+
+// D
+// B
+// C
+// A
+
+
+
+
+
+
+
+
+// 7. What will be the output
+
+async function test() {
+  console.log('1');
+  await Promise.resolve();
+  console.log('2');
+}
+
+console.log('3');
+test();
+console.log('4');
+
+
+// 3
+// 1
+// 4
+// 2
+
+
+
+
+
+
+
+
+
+// 8. Write a simple promise
+
+const myPromise = new Promise((resolve, reject) => {
+    const success = true
+    if (success){
+        resolve('Success')
+    }
+    else{
+        reject('REJECT')
+    }
+})
+
+
+myPromise.then(message => console.log(message)).catch(err => console.error(err)).finally(() => console.log('End')) 
+// Success
+//End

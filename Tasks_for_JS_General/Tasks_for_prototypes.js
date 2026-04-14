@@ -1,4 +1,71 @@
-// 1. Function and function instance
+// Constructor function
+
+
+// Wrong syntax
+// In function constructor , functionName(){} cannot be used, only in classes and objects literals
+
+// function User (name, age){
+//    this.name = name
+//    this.age = age
+//    sayHello(){
+//        console.log(`Hello ${this.name} is ${this.age}`)
+//    }
+// }
+
+
+// Wrong syntax,  methods in constructor function should be attached
+
+// function User (name, age){
+//     this.name = name
+//     this.age = age
+//     sayHello = function (){
+//         console.log(`Hello ${this.name} is ${this.age}`)
+//     }
+// }
+
+
+
+// const user0 = new User('A', 30)
+// user0.sayHello() // TypeError: user0.sayHello is not a function
+
+
+
+// Should be used with this or prototype
+
+// 'This'
+function User (name, age){
+    this.name = name
+    this.age = age
+    this.sayHello = function (){
+        console.log(`Hello ${this.name} is ${this.age}`)
+    }
+}
+
+
+
+const user1 = new User('A', 30)
+user1.sayHello() // Hello A is 30
+
+
+
+// Prototype - better as there is no copy of method for each instance, all reuse one
+
+function User (name, age){
+    this.name = name
+    this.age = age
+    User.prototype.sayHello = function (){
+        console.log(`Hello ${this.name} is ${this.age}`)
+    }
+}
+
+
+
+const user2 = new User('A', 30)
+user2.sayHello() // Hello A is 30
+
+
+
+// 2. Function and function instance
 
 
 function Person() {}
@@ -33,7 +100,7 @@ console.log(Person.__proto__) // {}
 
 
 
-// 2. CREATE OBJECT WITHOUT PROTOTYPE
+// 3. CREATE OBJECT WITHOUT PROTOTYPE
 
 const objWithoutPrototype = Object.create(null)
 console.log(Object.getPrototypeOf(objWithoutPrototype)) // null
@@ -47,7 +114,7 @@ console.log(Object.getPrototypeOf(objWithoutPrototype)) // null
 
 
 
-// 3. Manually implement inheritance
+// 4. Manually implement inheritance
 
 function Animal(name, age) {
     this.name = name;
@@ -82,7 +149,7 @@ Dog.prototype = Object.create(Animal.prototype)
 
 
 
-// 4. Add method to all objects created by a constructor
+// 5. Add method to all objects created by a constructor
 
 function Car(model) {
     this.model = model;
@@ -104,7 +171,7 @@ console.log(audiCar.sayModel()) //audi
 
 
 
-  // 5. Detect whether method is own or inherited
+  // 6. Detect whether method is own or inherited
 
   const obj = { a: 1 };
   console.log(Object.getOwnPropertyNames(obj)) // ['a']
@@ -117,7 +184,7 @@ console.log(audiCar.sayModel()) //audi
 
 
 
-  // 6. What is the output?
+  // 7. What is the output?
 
 const obj1 = { x: 1 };
 const child = Object.create(obj1);
@@ -135,7 +202,7 @@ console.log('x' in child);    // true as key in objects searches for own, inheri
 
 
 
-// 7. Why does this not work?
+// 8. Why does this not work?
 
 
 const obj2 = {};
@@ -149,32 +216,6 @@ obj2.sayHello = function(){
     console.log('Hello') //correct way
 }
 
-
-
-
-
-
-
-
-// 8. Modify this to use prototype instead of adding method to each instance
-
-function User(name) {
-    this.name = name;
-    this.sayHi = () => "Hi " + this.name;
-  }
-  
-
-
-  function User(name) {
-    this.name = name;
-  }
-
-  User.prototype.sayHi = function(){
-    return 'Hi ' + this.name
-  }
-
-const userAdmin = new User('admin')
-console.log(userAdmin.sayHi())
 
 
 
