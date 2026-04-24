@@ -81,3 +81,46 @@ function returnSumOfDigitsInArr(arr) {
 
 
 console.log(returnSum([22, 555, 67]))
+
+
+
+
+
+
+
+
+// Max subarray/ Kadane Algorithm
+
+
+function arrMaxSubarray(arr){
+    let currentSum = arr[0]
+    let maxSum = arr[0]
+
+    let start = 0
+    let end = 0
+    let tempStart = 0
+
+    for (let i = 1; i < arr.length; i++){
+
+        if (arr[i] > currentSum + arr[i]){
+            currentSum = arr[i]
+            tempStart = i
+        } else {
+            currentSum = currentSum + arr[i]
+        }
+
+        if (currentSum > maxSum){
+            maxSum = currentSum
+            start = tempStart
+            end = i
+        }
+    }
+
+    return {
+        maxSum,
+        subarray: arr.slice(start, end + 1)
+    }
+}
+
+
+    console.log(arrMaxSubarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))

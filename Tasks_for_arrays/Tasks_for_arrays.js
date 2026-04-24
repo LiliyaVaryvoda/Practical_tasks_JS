@@ -295,19 +295,22 @@ console.log(returnArrSum([])) //0
 
 
 // 17. CHECK IF ARRAY IS SORTED
-// First option, use every() and check that index equals array length -1, use OR operator and that each element is smaller than array index+1
-// Or use spread operator and sort and compare values using .every(value, index)
-function checkArrSorted(arr) {
-    // return arr.every((elem, index, array) => index === array.length-1 || elem < array[index + 1])
-    const arrSorted = [...arr].sort((a, b) => a - b)
-    console.log(arrSorted)
-    return arr.every((value, index) => value === arrSorted[index])
-
+// Start with 1, and compare element with [i-1], if smaller, return false
+function sortedArray(arr){
+    if (arr.length===1) return true
+    for (let i = 1; i < arr.length; i++){
+        if (arr[i] < arr[i-1]){
+            return false
+        }
+    }
+    return true
 }
 
-console.log(checkArrSorted([10, 5, 6, 7, 4])) //false
-console.log(checkArrSorted([6, 8, 9])) //true
-console.log(checkArrSorted([10, 2, 30])) // false
+
+console.log(sortedArray([4,3,5,8]))  // false
+console.log(sortedArray([3])) // true
+console.log(sortedArray([11, 7, 9, 3,4,5,8])) // false
+console.log(sortedArray([4,5]))  // true
 
 
 
