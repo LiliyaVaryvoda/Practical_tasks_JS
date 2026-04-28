@@ -318,4 +318,83 @@ console.log(Number(!a)) // 0
 console.log(NaN === NaN) // false
 console.log(Number.isNaN('abc')) // false
 console.log(Number.isNaN(-1)) //false
+
 console.log(Number.isNaN(NaN)) // true
+
+
+
+
+
+
+
+
+
+
+// 14. Reverse a number
+// Return NaN if not a number
+// Use Math.sign() to retrieve if its is 1 or -1 or 0 (number is positive or negative)
+// Then use Math.abs for number to remove sign
+// Then make it string, then array, then reverse and then string again
+// Use Number() to have a number from string
+
+function reverseNumber(num) {
+    if (typeof(num)!== 'number' || !Number.isFinite(num)) { return NaN}
+    const sign = Math.sign(num)
+    const numString = Number(Math.abs(num).toString().split('').reverse().join(''))
+    return numString*sign
+}
+
+console.log(reverseNumber(-123)) // -321
+console.log(reverseNumber(100)) // 1
+console.log(reverseNumber(0)) // 0
+console.log(reverseNumber('10N')) // NaN
+
+
+
+
+
+
+
+
+
+
+// 15. Check if pallindrome
+// Use String(), then split, reverse, join
+// Compare with String(incoming number)
+
+function isPalindromeNumber(num) {
+    if (typeof(num)!=='number' || !Number.isFinite(num)) {return false}
+    if (num < 0 ){ return false}
+
+    const numberString = String(num).split('').reverse().join('')
+    return String(num)===numberString
+}
+
+
+console.log(isPalindromeNumber(1221)) //true
+console.log(isPalindromeNumber(-1221)) // false
+console.log(isPalindromeNumber(1234)) //false
+console.log(isPalindromeNumber('1234')) // false
+
+
+
+
+
+
+
+
+
+// 16. Return the sum of all digits of the number
+// Check if type is nit number or number is not finite
+// Then convert to the string math.abs() number
+// Then split and reduce and return the sum
+function numberDigitsSum(num){
+    if (typeof(num) !== 'number' || !Number.isFinite(num)){return NaN}
+    const strNumber = String(Math.abs(num)).split('').reduce((acc,curr) => acc +Number(curr), 0)
+    return strNumber
+}
+
+console.log(numberDigitsSum(654)) //15
+console.log(numberDigitsSum(-654)) //15
+console.log(numberDigitsSum('654')) // NaN
+console.log(numberDigitsSum('65g')) // NaN
