@@ -140,3 +140,142 @@ let x = 0;
 function f() { console.log(x); }
 x = 2;
 f() //2
+
+
+
+
+
+
+
+
+// 6. Hoisting
+
+
+console.log(a) //undefined
+var a = 5
+
+
+
+// console.log(b)
+// Reference error
+let b = 5 
+
+
+
+
+
+
+
+
+// 7. Const mutation
+// COnst cannot be reassigned but can be mutated
+
+
+const obj = { name: 'John' }
+obj.name = 'Mike'
+console.log(obj.name) // Mike
+
+
+
+
+
+
+
+
+// 8. TDZ
+// If a variable is declared in a scope, JS will NEVER look outside for it
+
+
+let xVariable = 10
+
+function test() {
+  console.log(xVariable)
+  let xVariable = 20
+}
+
+test() // Reference error 
+
+
+
+
+
+
+
+
+
+
+// 9 . Shadowing
+// JS always looks in the closest scope first
+
+let a = 1
+
+function test() {
+  let a = 2
+  console.log(a)
+}
+
+test() // 2
+console.log(a)  // 1
+
+
+
+
+
+
+
+
+
+
+// 10. Block scope
+// Var is function scoped, let is block scoped 
+
+
+if (true) {
+  var a = 10
+}
+console.log(a) //10
+
+
+
+if (true) {
+  let b = 10
+}
+// console.log(b) // Reference error
+
+
+
+
+
+
+
+
+
+
+// 11. FUnction scope
+
+
+function test() {
+  if (true) {
+    var x = 5
+  }
+  console.log(x)
+}
+
+test() //5 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 12. Reassignment to a constant variable
+const a = 10
+// a = 20   // Type error: Assignment to constant variable.

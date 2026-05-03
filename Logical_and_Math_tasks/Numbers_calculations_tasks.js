@@ -398,3 +398,63 @@ console.log(numberDigitsSum(654)) //15
 console.log(numberDigitsSum(-654)) //15
 console.log(numberDigitsSum('654')) // NaN
 console.log(numberDigitsSum('65g')) // NaN
+
+
+
+
+
+
+
+
+
+// 17. FLoating numbers comparison
+// Use tolerance (elipson)
+
+function compareFloatNumbers(num1, num2, sum){
+    const epsilon = 1e-10
+    return Math.abs((num1+num2) - sum) < epsilon
+
+}
+
+console.log(compareFloatNumbers(0.1, 0.2, 0.3))
+console.log(compareFloatNumbers(0.1, 0.2, 0.35))
+
+
+
+
+
+
+
+
+
+
+// 18. Calculate diits occurencies
+
+
+
+function countOccurenciesDigits(num) {
+    if (typeof (num) !== 'number' || !Number.isFinite(num)) { return null }
+    let mapDigits = new Map()
+    for (let digit of String(num)) {
+        if (digit === '.') { continue }
+        if (mapDigits.has(digit)) {
+            mapDigits.set(digit, mapDigits.get(digit) + 1)
+        }
+        else {
+            mapDigits.set(digit, 1)
+        }
+    }
+    let maxValue = 0
+    let maxKey = null
+    for (let [key, value] of mapDigits) {
+        if (value > maxValue) {
+            maxValue = value
+            maxKey = key
+        }
+    }
+    return [maxKey, maxValue]
+}
+
+console.log(countOccurenciesDigits(5758475759444444494))
+console.log(countOccurenciesDigits('hello'))
+console.log(countOccurenciesDigits(3.566))
