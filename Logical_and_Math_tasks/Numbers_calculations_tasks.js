@@ -444,7 +444,7 @@ function countOccurenciesDigits(num) {
             mapDigits.set(digit, 1)
         }
     }
-    let maxValue = 0
+    let maxValue = -Infinity
     let maxKey = null
     for (let [key, value] of mapDigits) {
         if (value > maxValue) {

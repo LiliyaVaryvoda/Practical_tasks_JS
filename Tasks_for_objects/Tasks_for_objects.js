@@ -341,3 +341,31 @@ const objectRectangle = {
 
 console.log(objectRectangle.getArea())
 console.log(objectRectangle.getPerimeter())
+
+
+
+
+
+
+
+
+
+// 11. Check if property exist in object
+
+
+const userPropertyCheck = {
+  name: "Anna",
+  email: "anna@mail.com"
+};
+
+console.log(Object.hasOwn(userPropertyCheck, 'email')) //true
+
+
+
+
+
+
+
+
+
+// 12. 

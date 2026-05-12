@@ -168,7 +168,7 @@ let b = 5
 
 
 // 7. Const mutation
-// COnst cannot be reassigned but can be mutated
+// Const cannot be reassigned but can be mutated
 
 
 const obj = { name: 'John' }
@@ -251,7 +251,7 @@ if (true) {
 
 
 
-// 11. FUnction scope
+// 11. Function scope
 
 
 function test() {
@@ -279,3 +279,141 @@ test() //5
 // 12. Reassignment to a constant variable
 const a = 10
 // a = 20   // Type error: Assignment to constant variable.
+
+
+
+
+
+
+
+
+// 13. Var keyword in loop
+// Var is function scope so this variable is shared here
+// Loop order is init, condition, body, increment
+// So var is 0 as initialized, then insode loop var becomes 10, then increment makes it 11 and loop ends as condtion fails
+for (var i = 0; i < 3; i++) {
+  var i = 10
+}
+console.log(i) // 11
+
+
+
+
+
+
+
+
+
+// 13. Redeclare let variable in different scopes
+// let i = 10 is a new variable in the {}
+
+for (let i = 0; i < 3; i++) {
+  let i = 10
+  console.log(i)  // 10 10 10
+}
+
+
+
+
+
+
+
+
+// 14. Prining var value outside of the loop
+// Var is function scope, so it is redeclared
+// var in loop starts from 0, then becomes 1, 2, 3 and loop ends
+// Outside of the loop final var value is printed
+
+var i = 5
+for (var i = 0; i < 3; i++) {
+}
+console.log(i) // 3
+
+
+
+
+
+
+
+
+
+// 15. Prining let value outside of the loop
+// Variable shadowing
+
+// GLobal variable is printed
+let i = 5
+for (let i = 0; i < 3; i++) {
+
+}
+console.log(i) //5 
+
+
+
+
+
+
+
+
+
+// 16. Var is function scoped so can be accessed outside the block
+// The final result of var is 3 at the end
+for (var i = 0; i < 3; i++) {
+
+}
+console.log(i) //3 
+
+
+
+
+
+
+
+
+// 17. Functino parameter shadows outer variable so (i) => does not have value and is undefined
+
+for (var i = 0; i < 3; i++) {
+  setTimeout((i) => console.log(i), 0) // undefined undefined undefined
+}
+
+
+
+for (let i = 0; i < 3; i++) {
+  setTimeout((i) => console.log(i), 0) // undefined undefined undefined
+}
+
+
+
+
+
+
+
+// 18. IIFE - > value is passed with a new scope every time
+
+for (var i = 0; i < 3; i++) {
+  ((i) => setTimeout(() => console.log(i), 0))(i)    // 0 1 2
+}
+
+
+
+for (var i = 0; i < 3; i++) {
+  (function(i){
+    setTimeout(() => console.log(i), 0)   // 0 1 2
+  })(i)
+}
+
+
+
+
+
+
+
+
+
+// 19. Reassignment constant variable
+
+
+
+const a = []
+a = [1]
+
+// console.log(a) // TypeError: Assignment to constant variable.

@@ -86,6 +86,10 @@ console.log((false||0)) // 0
 
 
 
+console.log(0 && 1) // 0 as first falsy value
+console.log(1 && 2 && 3) // 3 as last truthy if all truthy
+console.log("" && "hello") // '' as first falsy value
+console.log("hi" && "" && "world") // '' as first falsy value
 
 
 

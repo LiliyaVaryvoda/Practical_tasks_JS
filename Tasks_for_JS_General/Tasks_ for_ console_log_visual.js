@@ -22,7 +22,10 @@ consoleNumbersRepeated(5)
 
 
 // 2. CONSOLE NUMBERS REPEATED IN PYRAMID
-
+// Two loops are needed
+// Outer is for rows; start with empty row string
+// Inner is for full row; add to empty row string each value inside inner row
+// Console.log full row in outer loo[]
 // 1 
 // 12 
 // 123 
@@ -51,7 +54,10 @@ consoleNumbersPyramid(6)
 
 
 // 3. CONSOLE DIAMOND PATTERN
-
+// Two loops with separate console for first and second halfs of diamond
+// Top half : loop from 1 to rows number and console spaces (rows - current row)
+// Then + console symbol by row * 2 -1 
+// BOttom half : from row - 1 till 1 and decrease
 //    *
 //   ***
 //  *****
@@ -102,7 +108,6 @@ consoleSimplePattern(4)
 
 // 5. CONSOLE SQUARE OF STARS
 
-
 // * * * * *
 // * * * * *
 // * * * * *
@@ -110,12 +115,8 @@ consoleSimplePattern(4)
 // * * * * *
 
 function consoleSquareOfStars(num) {
-    for (let i = 0; i < num; i++){
-        let row = ''
-        for (let j = 0; j < num ; j++){
-            row +='* '
-        }
-        console.log(row.trim())
+    for (let i = 1; i <= rows; i++){
+        console.log('* '.repeat(rows).trim())
     }
 }
 
@@ -126,10 +127,13 @@ consoleSquareOfStars(5)
 
 
 
-
-
 // 6. CONSOLE CHESSBOARD
-
+// Outer and inner loops
+// Outer loop for rows, inner loop for row
+// Create empty sting for row
+// If row + position % 2 is even, add 0, else add 1
+// As 1 row + 1 place is 0, 1 row + 2 place is 1
+// As 2 row + 1 place is 1 and 2 row + 2 place is 0
 
 // 0101
 // 1010
@@ -161,6 +165,11 @@ consoleChessBoard(4)
 
 
 // 7. CONSOLE MIRROR PIRAMIDE
+// One outer loop and 2 inner loops
+// Outer loop goes from 1 to rows number and define empty string row
+// First inner loop goes from 1 to this row number + adding to string row
+// Second inner loop goes from this row -1 to 1 and decreasing + adding to string row
+// Console after two inner loops
 
 // 1
 // 121

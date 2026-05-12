@@ -1,5 +1,5 @@
 // 1. RETURN FIRST N VALUES OF FIBONACHI SEQUENCE
-
+// Use loop and push first value, then define third and reassign first and second
 function fibonacchiFirstNumbers(value) {
     let fibonacchiNumbers = []
     let firstNum = 0
@@ -26,7 +26,7 @@ console.log(fibonacchiFirstNumbers(15))
 
 
 // 2. RETURN FIBONACCHI NUMBERS UP TO N NUMBER
-
+// Use while (till first is less than desired num), push first, then create third and reassign first and second
 function returnFibonacchiUpToNum(num) {
     let numbersArr = []
     let firstNum = 0
@@ -53,16 +53,29 @@ console.log(returnFibonacchiUpToNum(21))
 
 
 
+
 // 3. RETURN NUMBER IN N PLACE IN FIBONACCHI SEQUENCE
+// Use for loop and then retrieve number based on index
 
 function returnNumberInPlace(place) {
-    if (place === 1) return 0
-    if (place === 2) return 1
-    return returnNumberInPlace(place - 1) + returnNumberInPlace(place - 2)
+    if (place<=0 || !Number.isInteger(place)) {return null}
+    let fibNumbers = []
+    let first = 0
+    let second = 1
+    for (let i= 0 ; i< place; i++){
+        fibNumbers.push(first)
+        let third = first+second
+        first = second
+        second = third
+    }
+    return fibNumbers[place-1]
 }
 
-console.log(returnNumberInPlace(10)) //34
-
+console.log(returnNumberInPlace(6)); // 5
+console.log(returnNumberInPlace(1)); // 0
+console.log(returnNumberInPlace(0)); // null
+console.log(returnNumberInPlace(-3)); // null
+console.log(returnNumberInPlace("abc")); // null
 
 
 
@@ -71,7 +84,8 @@ console.log(returnNumberInPlace(10)) //34
 
 
 // 4. CHECK IF NUMBER IS IN FIBONACCHI SEQUENCE
-
+// Use while first number < number
+// Push first number, create third number as sum of first and second; reassign first and second
 function checkIfFibonacchi(number) {
     let numbersArr = []
     let firstNum = 0
