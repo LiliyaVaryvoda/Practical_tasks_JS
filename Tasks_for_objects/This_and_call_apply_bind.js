@@ -1,9 +1,10 @@
-// 1. This context
-// Object context is lost because function return another function and this returned function is called separately
+// 1. Object method that has inner function with this
+
+// Object context is lost because function return another function and this returned function is called separately as plain function without object context
 
 
-
-const obj = {
+// 1.1 Object with inner function that has return
+const objInner = {
   value: 10,
   get() {
     return function () {
@@ -12,39 +13,50 @@ const obj = {
   }
 };
 
-console.log(obj.get()()); // undefined
+console.log(objInner.get()()); // undefined
 
 // the same
-const fn = obj.get();
-console.log(fn()); // undeifned
+const fn = objInner.get();
+console.log(fn()); // undefined
 
 
 
-// fix
+// Fix 1
+// ------------------
 
-const objFixed = {
+const objInnerFixWithBind = {
   value: 10,
   get() {
-    return function () {
+    return function () { 
       return this.value;
     };
   }
 };
 
-console.log(objFixed.get().call(objFixed)); // 10
-console.log(objFixed.get().apply(objFixed)); //10
+console.log(objInnerFixWithBind.get().call(objInnerFixWithBind)); // 10
+
+// the same
+const fnFixWithBind = objInnerFixWithBind.get().bind(objInnerFixWithBind);
+console.log(fnFixWithBind()); // 10
 
 
-const objFixed2 = {
+
+// Fix 2
+// --------------------
+const objInnerFixWithArrow = {
   value: 10,
   get() {
-    return () => {
+    return () => { 
       return this.value;
     };
   }
 };
 
-console.log(objFixed2.get()()); //10
+console.log(objInnerFixWithArrow.get()()); // 10
+
+// the same
+const fnInnerFixWithArrow = objInnerFixWithArrow.get();
+console.log(fnInnerFixWithArrow()); // 10
 
 
 
@@ -54,29 +66,8 @@ console.log(objFixed2.get()()); //10
 
 
 
-// 2. Override this with .call()
+// 1.2 Object with function that has inner function and inner function does not have return and is called inside outer function
 
-
-const objOverride = {
-  value: 10,
-  get() {
-    return this.value;
-  }
-};
-
-console.log(objOverride.get.call({ value: 99 })); // 99
-
-
-
-
-
-
-
-
-
-
-
-// 3. This context lost
 // inner() is called as a plain function, not as objContext.inner().
 
 
@@ -93,7 +84,8 @@ const objContext = {
 objContext.outer() // undefined
 
 
-// fix
+// fix: Use call binding for inner function execution
+// ----------------------------------------------
 
 const objContextFix = {
   name: "Anna",
@@ -113,11 +105,9 @@ objContextFix.outer() // Anna
 
 
 
+// 1.3 Object with function that has inner function with return and outer function return inner function execution
 
-
-
-// 4. This context
-// Undefined because fn() is not attached to user object
+// fn() is called as a plain function and loses context
 
 
 const user = {
@@ -133,7 +123,8 @@ const user = {
 console.log(user.getName()); // undefined
 
 
-// fix
+// fix 1 : arrow inner function declaration
+// --------------------------------
 
 const userFixed = {
   name: "Anna",
@@ -150,14 +141,28 @@ console.log(userFixed.getName()); // Anna
 
 
 
+// fix 2 : use call binding
+// ----------------------------------
+const userFixed2 = {
+  name: "Anna",
+  getName() {
+    const fn = function (){
+      return this.name;
+    };
+    return fn.call(this);
+  }
+};
+
+console.log(userFixed2.getName()); // Anna
 
 
 
 
 
 
-// 5. This context
-
+// 2. Settimeout
+// setTimeout callback is a plain function that not bound to the object
+// Settimeout callbacl is a plain function : example 1
 const user1 = {
   name: "Anna",
   getName() {
@@ -170,6 +175,52 @@ const user1 = {
 user1.getName() // undefined
 
 
+
+// Settimeout callbacl is a plain function : example 2
+const objSetTimeout = {
+  value: 1,
+  inc() {
+    setTimeout(function () {
+      this.value++;
+      console.log(this.value);
+    }, 0);
+  }
+};
+
+objSetTimeout.inc(); // NaN; because this.undefined++ =NaN
+
+
+
+
+// Settimeout callbacl is a plain function : example 3 
+// Here it is undefined as obj.function as setTimeout callback becomes plain function and it is detached and loses this context
+const objSetTimeoutRef = {
+  name: "Anna",
+  print() {
+    console.log(this.name);
+  }
+};
+
+setTimeout(objSetTimeoutRef.print, 0) // undefined
+
+
+
+// Settimeout callbacl is a plain function : example 4
+// Here it is  error as obj.function() is executed immediately and callback us undefined (as this function return undefined)
+const objSetTimeoutErr = {
+  name: "Anna",
+  print() {
+    console.log(this.name);
+  }
+};
+
+// setTimeout(objSetTimeoutErr.print(), 0) // error
+
+
+
+
+// Fix 1 example : use function wrapper
+// ------------------------------------
 const user1Fix = {
   name: "Anna",
   getName() {
@@ -183,6 +234,16 @@ user1Fix.getName() // Anna
 
 
 
+// Fix 2 example : use function wrapper
+// ------------------------------------
+const objCorrect = {
+  name: "Anna",
+  print() {
+    console.log(this.name);
+  }
+};
+
+setTimeout(() => objCorrect.print(), 0); // Anna
 
 
 
@@ -191,7 +252,7 @@ user1Fix.getName() // Anna
 
 
 
-// 6. This as global
+// 3. This as global
 
 
 
@@ -208,7 +269,7 @@ show(); // global object  Object [global] in not strict mode
 
 
 
-// 7. Detached function
+// 4. Detached function
 
 
 
@@ -222,11 +283,24 @@ const objDet = {
 const fnDet = objDet.show;
 fnDet(); // undefined
 
-// fix
+// Fix : binding
 const fnDetFixed = objDet.show.bind(objDet);
 fnDetFixed() //10
 
 
+// Detached example 2
+
+const counter = {
+  count: 0,
+  inc() {
+    this.count++;
+  }
+};
+
+const inc = counter.inc;
+inc();
+
+console.log(counter.count); // 0
 
 
 
@@ -234,9 +308,7 @@ fnDetFixed() //10
 
 
 
-
-
-// 8. Changing property of existing value
+// 5. Changing property of existing value inside method
 
 
 
@@ -258,8 +330,8 @@ console.log(objProperty.inc()); // 3
 
 
 
-// 9.
-
+// 6. Arrow inner function
+// Arrow inner function takes scope from parent scope (getValue) function
 
 const objArrow = {
   value: 10,
@@ -278,20 +350,17 @@ console.log(fnArrow()); //10
 
 
 
+// 7. Override this with .call()
 
-// 10. Object function detached
 
-const counter = {
-  count: 0,
-  inc() {
-    this.count++;
+const objOverride = {
+  value: 10,
+  get() {
+    return this.value;
   }
 };
 
-const inc = counter.inc;
-inc();
-
-console.log(counter.count); // 0
+console.log(objOverride.get.call({ value: 99 })); // 99
 
 
 
@@ -300,60 +369,16 @@ console.log(counter.count); // 0
 
 
 
-// 11. Settimeout
-// Any function passed to setTimeout is called as a plain function call
 
+// 8. This in constructor function
 
+function Person(name) {
+  this.name = name;
+}
 
-// Here function inside settimeout becomes just plain function and it loses this context
-const objSetTimeout = {
-  value: 1,
-  inc() {
-    setTimeout(function () {
-      this.value++;
-      console.log(this.value);
-    }, 0);
-  }
+Person.prototype.getName = function () {
+  return this.name;
 };
 
-objSetTimeout.inc(); // NaN; because this.undefined++ =NaN
-
-
-
-
-// Here it is undefined as obj.function as setTimeout callback becomes plain function and it is detached and loses this context
-const objSetTimeoutRef = {
-  name: "Anna",
-  print() {
-    console.log(this.name);
-  }
-};
-
-setTimeout(objSetTimeoutRef.print, 0) // undefined
-
-
-
-// Here it is  error as obj.function() is executed immediately and callback us undefined (as this function return undefined)
-const objSetTimeoutErr = {
-  name: "Anna",
-  print() {
-    console.log(this.name);
-  }
-};
-
-// setTimeout(objSetTimeoutErr.print(), 0) // error
-
-
-
-
-// There is wrapper function as settimeout callback function so everything is working; could have been bind
-
-const objCorrect = {
-  name: "Anna",
-  print() {
-    console.log(this.name);
-  }
-};
-
-setTimeout(() => objCorrect.print(), 0); // Anna
-
+const p = new Person("Anna");
+console.log(p.getName()); // Anna
