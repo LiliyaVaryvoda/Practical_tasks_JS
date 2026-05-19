@@ -417,3 +417,35 @@ const a = []
 a = [1]
 
 // console.log(a) // TypeError: Assignment to constant variable.
+
+
+
+
+
+
+
+
+
+
+// 20. What this code will return
+
+
+
+console.log('Start')
+
+async function test() {
+  console.log('Inside')
+
+  await Promise.resolve()
+
+  console.log('After await') // it belongs to paused async function so it runs later
+}
+
+test()
+
+console.log('End')
+
+// Start
+// Inside
+// End
+// After await

@@ -168,3 +168,24 @@ console.log(increment()) // 1
 console.log(count) // 1
 console.log(increment()) // 2
 console.log(count) // 2
+
+
+
+
+
+
+
+
+// 7. Lexical scope
+// FUnction has access to variables where this function was DEFINED
+
+
+let xVariable = 1
+function test() {
+  console.log(xVariable)
+}
+function wrapper() {
+  let xVariable = 2
+  test()
+}
+wrapper() //1

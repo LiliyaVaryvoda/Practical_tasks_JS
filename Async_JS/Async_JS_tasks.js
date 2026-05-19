@@ -412,3 +412,102 @@ console.log('D');
 // b
 //c
 
+
+
+
+
+
+
+
+// 14. WHat will be the output?
+
+
+Promise.resolve()
+  .then(() => {
+    console.log('A');
+    return Promise.resolve();
+  })
+  .then(() => {
+    console.log('B');
+    setTimeout(() => {
+      console.log('C');
+    }, 0);
+  })
+  .then(() => {
+    console.log('D');
+  });
+
+console.log('E');
+
+
+// E
+// A
+// B
+// D
+// C
+
+
+
+
+
+
+
+
+
+
+// 15. What will be the output
+
+
+async function fn() {
+  console.log('1');
+
+  setTimeout(() => {
+    console.log('2');
+  }, 0);
+
+  await Promise.resolve();
+
+  console.log('3');
+}
+
+fn();
+
+console.log('4');
+
+
+// 1 4 3 2
+
+
+
+
+
+
+
+
+
+
+// 16. What is the order of execution
+
+console.log('A');
+
+setTimeout(() => {
+  console.log('B');
+
+  Promise.resolve().then(() => {
+    console.log('C');
+  });
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('D');
+
+  setTimeout(() => {
+    console.log('E');
+  }, 0);
+});
+
+console.log('F');
+
+
+
+// A F D B C E
