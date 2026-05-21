@@ -171,22 +171,26 @@ console.log(findMajorityElement([1, 2, 3, 4])) // No majority element
 
 
 // 8. FIND COMMON PREFIX IN ARRAY OF WORDS
-// Loop through first word, then loop though array words, if there is mismatch return prefix or -1, if not mismatches, after looping words add prefix to variable, return variable at the end of function
+// Loop through first word characters, then loop though array words, if there is mismatch return prefix or -1, if not mismatches, after looping words add prefix to variable, return variable at the end of function
+
 function findCommonPrefix(arr) {
-    const firstWord = arr[0]
-    let commonPrefix = ''
-    for (let i = 0 ; i< firstWord.length; i++){
-        for (let word = 1; word < arr.length; word++){
-            if (!arr[word][i] || arr[word][i] !== firstWord[i]) {return commonPrefix || -1}
-        }
-        commonPrefix+=firstWord[i]
+  if (arr.length === 0) {return -1}
+  const firsWord = arr[0]
+  let commonPrefix = ''
+  for (let char = 0; char < firsWord.length; char++) {
+    for (let i = 1; i < arr.length; i++) {
+      if (!arr[i][char] || arr[i][char] !== firsWord[char]) { return commonPrefix || -1}
     }
-return commonPrefix
+      commonPrefix+=firsWord[char]
+
+  }
+  return commonPrefix
 }
 
-console.log(findCommonPrefix(["flower", "flow", "flight"])) // fl
-console.log(findCommonPrefix(["dog", "racecar", "car"])) // -1
-console.log(findCommonPrefix(["dog", "dog", "dog"])) //dog
+console.log(findCommonPrefix(["flower", "flow", "flight"]))
+console.log(findCommonPrefix(["dog", "racecar", "car"]))
+console.log(findCommonPrefix(["dog", "dog", "dog"]))
+
 
 
 

@@ -429,32 +429,38 @@ console.log(compareFloatNumbers(0.1, 0.2, 0.35))
 
 
 // 18. Calculate diits occurencies
-
+// Return null if input type is not number, string or NUmber(input) is NaN
+// Use map
 
 
 function countOccurenciesDigits(num) {
-    if (typeof (num) !== 'number' || !Number.isFinite(num)) { return null }
-    let mapDigits = new Map()
-    for (let digit of String(num)) {
-        if (digit === '.') { continue }
-        if (mapDigits.has(digit)) {
-            mapDigits.set(digit, mapDigits.get(digit) + 1)
-        }
-        else {
-            mapDigits.set(digit, 1)
-        }
+  if ((typeof (num)!== 'number' && typeof (num)!=='string' )|| isNaN(Number(num))) return null
+  let numbersMap = new Map()
+  for (let elem of String(num)){
+    if (elem==='.'|| elem===',' || elem==='-') continue
+    if (numbersMap.has(elem)){
+      numbersMap.set(elem, numbersMap.get(elem)+1)
     }
-    let maxValue = -Infinity
-    let maxKey = null
-    for (let [key, value] of mapDigits) {
-        if (value > maxValue) {
-            maxValue = value
-            maxKey = key
-        }
+    else{
+      numbersMap.set(elem, 1)
     }
-    return [maxKey, maxValue]
+  }
+
+  let biggestNumber = null
+  let occurenciesNumber = 0
+
+  for (let [key, value] of numbersMap){
+    if (value > occurenciesNumber){
+      occurenciesNumber = value
+      biggestNumber = key
+    }
+  }
+
+return { digit: biggestNumber, count: occurenciesNumber }
 }
 
 console.log(countOccurenciesDigits(5758475759444444494))
 console.log(countOccurenciesDigits('hello'))
 console.log(countOccurenciesDigits(3.566))
+console.log(countOccurenciesDigits('123454'))
+console.log(countOccurenciesDigits(-123333))

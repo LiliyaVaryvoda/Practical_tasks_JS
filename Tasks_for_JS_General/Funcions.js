@@ -29,12 +29,12 @@ function sayHello() {
 }
 
 // function execution; function runs immediately; fn1 becomes function result (here 'hello'), so 'hello'() causes error because string is not a function
-const fn1 = sayHello()
+const fnFunc = sayHello()
 
-// console.log(fn1())   //  TypeError: fn is not a function
-// fn1()   //  TypeError: fn is not a function
+// console.log(fnFunc())   //  TypeError: fn is not a function
+// fnFunc()   //  TypeError: fn is not a function
 
-console.log(fn1) //hello
+console.log(fnFunc) //hello
 
 
 
@@ -189,3 +189,46 @@ function wrapper() {
   test()
 }
 wrapper() //1
+
+
+
+
+
+
+
+
+// 8. Closure and state
+// Closure keeps the state only if the function that creates it is called once
+
+function outer1() {
+  let x = 1;
+
+  return function () {
+    x++;
+    console.log(x);
+  };
+}
+
+const fn1 = outer1()
+
+fn1(); // 2
+fn1(); // 3
+fn1(); // 4
+
+
+// -----------------
+function outer2() {
+  let x = 1;
+
+  return function () {
+    x++;
+    console.log(x);
+  };
+}
+
+const fn2 = outer2
+
+fn2()(); // 2
+fn2()(); // 2
+fn2()(); // 2
+
