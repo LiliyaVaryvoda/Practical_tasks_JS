@@ -19,12 +19,12 @@ console.log(removeWords('Word word WORD'));                  // 'word'
 
 
 function removeDup(str) {
-    const uniqueSet = new Set(str.split(''))
-    return [...uniqueSet].join('')
+    return [...new Set(str)].join('')
 }
 
 console.log(removeDup("helhlo worlood"))
 //helo wrd
+
 
 
 
@@ -63,26 +63,10 @@ console.log(removeDigits('hello3 wor5ld 6'))
 // 5. REMOVE ALL PUNCTUATION FROM SENTENSE
 
 function removePunctuationFromSentense(str) {
-    return str.replace(/[\p{P}\p{S}]/gu, '')
+    const regex = /[^a-zA-Z0-9 ]+/g
+    return str.replace(regex, '')
+
 }
 
-console.log(removePunctuationFromSentense('hell!o.w@rld,here ?how^\:'))
-//helloworldhere how
-
-
-
-
-
-
-// 6. REMOVE ALL PUNCTUATION VARIANT 2
-
-function removePunc(str) {
-    const regex = /[a-zA-Z0-9 ]/
-    const myArr = str.split('')
-    const myArr2 = myArr.filter(char => regex.test(char)).join('')
-    return myArr2
-}
-
-
-console.log(removePunc('hell!o.world,here ?how^\:'))
+console.log(removePunctuationFromSentense('hell!o.w@rld,here ?how^\\:'))
 //helloworldhere how

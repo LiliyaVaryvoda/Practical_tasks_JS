@@ -1,5 +1,5 @@
 // 1. CHECK IF STRING IS PALLINDROME
-
+// Clean the original string, then reverse it and copare to reversed
 
 function isPalindrome(str) {
     const cleanedStr = str.toLowerCase().replace(/[^a-z0-9]/g, '')
@@ -43,14 +43,16 @@ console.log(checkIfAnagram("listen", "hello")); // false
 
 
 // 3. CHECK IF ALL CHARACTERS IN STRING ARE UNIQUE
-
+// Remove whitespaces, use Set and compare Set size to no-spaces string length
 function checkIfUniqueChar(str) {
-    const setStr = new Set(str)
-    return str.length === setStr.size
+    const strUpdated = str.replaceAll(' ', '')
+    const uniqueStr = new Set(strUpdated)
+    return strUpdated.length === uniqueStr.size
 }
 
-console.log(checkIfUniqueChar('programming')) //false
-console.log(checkIfUniqueChar('hey')) //true
+console.log(checkIfUniqueChar("programming")); // false
+console.log(checkIfUniqueChar("hey")); // true
+console.log(checkIfUniqueChar("hey i am")); // true
 
 
 
@@ -60,7 +62,7 @@ console.log(checkIfUniqueChar('hey')) //true
 
 
 // 4. CHECK WHICH VERSION IS LATEST
-
+// Use Number(number ?? 0)
 
 function checkVersion(str1, str2) {
     const arr1 = str1.split('.')
@@ -96,7 +98,7 @@ console.log(checkVersion('5.4.33', '5.4.3')) // 5.4.33
 
 
 // 5. CHECK IF SENTENCE IS PANGRAM (CONTAINS EVERY LETTER FROM ALPHABET)
-
+// Remove everything that is not letter and use Set.seze === 26
 function checkIfPangram(str){
     const setStr = new Set (str.toLowerCase().replace(/[^a-z]/gu, ''))
     return setStr.size === 26
@@ -117,7 +119,7 @@ console.log(checkIfPangram('Hello world.')) // false
 
 
 // 6. CHECK IF STRING CONTAINS ALL VOWELS
-
+// Use .every()
 function checkIfAllVowels(str){
     const vowels = ['a', 'o', 'i', 'e', 'u']
     return vowels.every(v => str.toLowerCase().includes(v))
@@ -136,15 +138,20 @@ console.log(checkIfAllVowels('hello'))   // false
 
 
 // 7. CHECK IF STRING HAS CONSECUTIVE REPEATING CHARACTERS
-
-function hasConsecutiveRepeatingLetters(str){
-    return /(.)\1/.test(str)
+// Loop and check if element[i] equals element [i+1]
+function hasConsecutiveRepeatingLetters(str) {
+    if (typeof(str)!=='string'||str.length<=1) {return false}
+    for (let i = 0; i < str.length-1; i++){
+        if (str[i]===str[i+1]) {return true}
+    }
+    return false
 }
 
-console.log(hasConsecutiveRepeatingLetters("hello")); // true  ('ll')
+console.log(hasConsecutiveRepeatingLetters("hello")); // true
 console.log(hasConsecutiveRepeatingLetters("world")); // false
-console.log(hasConsecutiveRepeatingLetters("bookkeeper")); // true ('oo', 'kk', 'ee')
+console.log(hasConsecutiveRepeatingLetters("bookkeeper")); // true
 console.log(hasConsecutiveRepeatingLetters("abc")); // false
+
 
 
 
@@ -199,18 +206,17 @@ console.log(checkIfLetters('ababab')) //true
 
 // 10. CHECK IF STRING HAS REPEATED PATTERN
 // DOuble the string, remove forst and last characters and check if it includes original string
-function isRepeatingPattern(str){
-    if(str.length<1){return false}
-    let doubledStr = str + str
-    let slicedStr = doubledStr.slice(1, doubledStr.length-1)
-    return slicedStr.includes(str)
-
+function isRepeatingPattern(str) {
+    if(typeof(str)!=='string' || str.length<=1) {return false}
+    const updatedString = str+str
+    const updatedString2 = updatedString.slice(1, updatedString.length-1)
+    return updatedString2.includes(str)
 }
 
-console.log(isRepeatingPattern("abab"));      // true
+console.log(isRepeatingPattern("abab")); // true
 console.log(isRepeatingPattern("abcabcabc")); // true
-console.log(isRepeatingPattern("aba"));       // false
-console.log(isRepeatingPattern("aaaa"));      // true
-console.log(isRepeatingPattern("a"));         // false
-console.log(isRepeatingPattern("a5a5"));         // true
-console.log(isRepeatingPattern("a5a6"));         // false
+console.log(isRepeatingPattern("aba")); // false
+console.log(isRepeatingPattern("aaaa")); // true
+console.log(isRepeatingPattern("a")); // false
+console.log(isRepeatingPattern("a5a5")); // true
+console.log(isRepeatingPattern("a5a6")); // false

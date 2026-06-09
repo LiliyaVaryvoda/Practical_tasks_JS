@@ -36,7 +36,7 @@ console.log(findOccurrencesStr("prgogrammingg"))
 
 
 // 2. FIND OCCURENCIES IN STRING FOR WORDS
-
+// Split by everything that is not letters [/^a-zA-Z/+]
 
 function findOccurrencesWords(str) {
     let mapOccurencies = new Map()
@@ -75,35 +75,33 @@ console.log(findOccurrencesWords("Hello world how are you hello, doing hello are
 
 
 function findSmallestOccurencies(str) {
+    const clearedStr = str.toLowerCase().replace(/[^a-z0-9]+/g, '')
     let wordsMap = new Map()
-    const strWithoutSpaces = str.replace(/\s/g, '')
-    let minNum = Infinity
-    let smallestOccurencies = {}
-    for (let i = 0; i < strWithoutSpaces.length; i++) {
-        if (wordsMap.has(strWithoutSpaces[i])) {
+    for (let i = 0; i < clearedStr.length; i++) {
+        if (wordsMap.has(clearedStr[i])) {
             wordsMap.set(
-                strWithoutSpaces[i],
-                wordsMap.get(strWithoutSpaces[i]) + 1
+                clearedStr[i],
+                wordsMap.get(clearedStr[i]) + 1
             )
         } else {
-            wordsMap.set(strWithoutSpaces[i], 1)
+            wordsMap.set(clearedStr[i], 1)
         }
     }
-
+    let smallestNumber = Infinity
+    let smallestArr = {}
     for (let value of wordsMap.values()) {
-        if (value < minNum) {
-            minNum = value
-        }
-
-    }
-
-    for ([keys, value] of wordsMap.entries()) {
-        if (value === minNum) {
-            smallestOccurencies[keys] = value
+        if (value < smallestNumber) {
+            smallestNumber = value
         }
     }
-    return smallestOccurencies
+    for (let [key, value] of wordsMap) {
+        if (value === smallestNumber) {
+            smallestArr[key]=value
+        }
+    }
+    return smallestArr
 }
+
 
 
 console.log(findSmallestOccurencies('hello world here'))
@@ -117,31 +115,33 @@ console.log(findSmallestOccurencies('hello world here'))
 // 4. FIND THE BIGGEST OCCURENCY CHARACTER
 
 function findBiggestOccurencies(str) {
-    const clearedStr = str.replace(/\s/g, '')
-    let mapChar = new Map()
-    let biggestNum = 0
-    let biggestOccurencies = {}
-    for (let char = 0; char < clearedStr.length; char++) {
-        if (mapChar.has(clearedStr[char])) {
-            mapChar.set(clearedStr[char], mapChar.get(clearedStr[char]) + 1)
-        }
-        else {
-            mapChar.set(clearedStr[char], 1)
+    const clearedStr = str.toLowerCase().replace(/[^a-z0-9]+/g, '')
+    let wordsMap = new Map()
+    for (let i = 0; i < clearedStr.length; i++) {
+        if (wordsMap.has(clearedStr[i])) {
+            wordsMap.set(
+                clearedStr[i],
+                wordsMap.get(clearedStr[i]) + 1
+            )
+        } else {
+            wordsMap.set(clearedStr[i], 1)
         }
     }
-
-    for (let value of mapChar.values()) {
-        if (value > biggestNum)
-            biggestNum = value
-    }
-
-    for (let [key, value] of mapChar.entries())
-        if (value === biggestNum) {
-            biggestOccurencies[key] = value
+    let biggestNumOccurencies = -Infinity
+    let biggestOccList = {}
+    for (let value of wordsMap.values()){
+        if (value>biggestNumOccurencies){
+            biggestNumOccurencies = value
         }
+    }
+    console.log(biggestNumOccurencies)
 
-    return biggestOccurencies
-
+    for (let [key, value] of wordsMap){
+        if (value === biggestNumOccurencies){
+            biggestOccList[key] = value
+        }
+    }
+    return biggestOccList
 }
 
 
@@ -207,8 +207,6 @@ console.log(countCaseLetters('BabaNa #   $eldeRberry1 %hEre *frUit'))
 
 
 
-
-
 // 7. FIND COMMON CHARACTERS IN TWO STRINGS
 
 function findCommonLetters(str1, str2) {
@@ -237,12 +235,18 @@ console.log(findCommonLetters('letoa', 'hello')) // [ 'l', 'e', 'o' ]
 // 8. FIND TOTAL NUMBER OF DIGITS IN STRING
 
 function findTotalNumOfDigits(str){
-    return str.split('').filter(char => /\d/.test(char)).length
+    // const regex = /[^0-9]/g
+    // const strCleared = str.replace(regex, '')
+    // return strCleared.length>0 ? strCleared.length: -1
+    const digits = str.match(/[0-9]/g)
+    return digits? digits.length : -1
 }
+
 
 console.log(findTotalNumOfDigits('he110 wor1d!')) //4
 console.log(findTotalNumOfDigits('h7j5j4k9')) //4
-
+console.log(findTotalNumOfDigits('aaaa')) //-1
+console.log(findTotalNumOfDigits('-1')) //1
 
 
 
@@ -310,13 +314,16 @@ console.log(findAllIndices("hello world", "o"))
 // 11. FIND SHORTEST WORD IN SENTENCE
 
 function findShortestWord(str){
-    let strArray = str.split(/[^a-zA-Z]+/).filter(Boolean)
-    return strArray.reduce((shortest, current) => {
-        return shortest.length>current.length ? current : shortest
-    })
+    if(typeof(str)!== 'string' || str.length===0){return -1}
+    const arr = str.split(/[^a-zA-Z]+/g).filter(Boolean)
+    if (arr.length === 0) {return -1}
+    return arr.reduce((acc,cur) => acc.length<=cur.length? acc : cur)
 }
 
-console.log(findShortestWord('beautifully hello, world amazing')) // hello
+console.log(findShortestWord('beautifully hello, world amazing'))// hello
+console.log(findShortestWord(''))// -1
+console.log(findShortestWord('hello'))// hello
+console.log(findShortestWord('????'))// -1
 
 
 
@@ -330,19 +337,18 @@ console.log(findShortestWord('beautifully hello, world amazing')) // hello
 
 function countConsonants(str){
     const vowels = ['a', 'o', 'i', 'e', 'u']
-    let mapWords = new Map()
-    const cleanedStr = str.replace(/[^a-zA-Z]/g, '').toLowerCase()
-    for (let char of cleanedStr){
-        if (!vowels.includes(char)) {
-            if(mapWords.has(char)){
-                mapWords.set(char, mapWords.get(char) + 1)
+    let mapChar = new Map()
+    for (let elem of str.toLowerCase()){
+        if (/[a-z]/.test(elem) && !vowels.includes(elem)){
+            if (mapChar.has(elem)){
+                mapChar.set(elem, mapChar.get(elem)+1)
             }
             else{
-                mapWords.set(char, 1)
+                mapChar.set(elem, 1)
             }
         }
     }
-    return mapWords
+    return mapChar
 }
 
 console.log(countConsonants('opIu dh!gNfin FF&'))
@@ -357,14 +363,22 @@ console.log(countConsonants('opIu dh!gNfin FF&'))
 
 
 
+
 // 13. COUNT WORDS IN SENTENSE
 
 function countWordsInSentense(str){
-    const splitArray = str.split(/[^a-zA-Z]/g).filter(Boolean)
-    return splitArray.length
+    if (typeof(str)!=='string' || str.length===0){return -1}
+    const regex = /[^a-zA-Z]+/g
+    const strUpdated = str.split(regex).filter(Boolean)
+    return strUpdated.length>0? strUpdated.length: -1
 }
 
-console.log(countWordsInSentense('Hello   world,how are you?')) //5
+console.log(countWordsInSentense('Hello   world,how are you?'))// 5
+console.log(countWordsInSentense(''))// -1
+console.log(countWordsInSentense('hello'))// 1
+console.log(countWordsInSentense('?'))// -1
+console.log(countWordsInSentense('hello?here'))// 2
+
 
 
 

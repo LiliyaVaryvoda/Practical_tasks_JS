@@ -53,11 +53,49 @@ console.log(flatNestedArray([1, 2, [3, 4, [5, 6]]]))
 
 
 
+
+
+// 3.1 Falt array using recursion
+function flattenArray(arr){
+    let finalArr = []
+
+    for (let elem of arr){
+        if (!Array.isArray(elem)){
+            finalArr.push(elem)
+        }
+        else{
+          const nested = flattenArray(elem)
+         // finalArr.push(...nested)
+          for (let value of nested){
+            finalArr.push(value)
+          }
+        }
+    }
+    return finalArr
+}
+
+console.log(flattenArray([1, [2, [3, [4]], 5]])) // 1 2 3 4 5
+
+
+
+
+
+
+
+
+
 // 4. FIND MAX VALUE OF ARRAY ELEMENTS
 // Use Math.max() and spread operator
 function arrMaxNum(arr) {
-    const maxValue = Math.max(...arr)
-    return maxValue
+    // const maxValue = Math.max(...arr)
+    // return maxValue
+    
+    let maxValue = -Infinity
+    for (let i =0 ; i< arr.length; i++)
+        { if (arr[i] > maxValue){ 
+            maxValue = arr[i]
+         } 
+        } return maxValue
 }
 console.log(arrMaxNum([6, 8, 9, 4]))
 // 9
@@ -70,16 +108,29 @@ console.log(arrMaxNum([6, 8, 9, 4]))
 
 
 // 5. FIND TWO SMALLEST NUMBERS IN ARRAY AND ARRAY SHOUDL BE UNCHANGED
-// Use spread operator, sort() and slice()
-function findSmallest(arr) {
-    const arrSorted = [...arr].sort((a, b) => a - b)
-    return arrSorted.slice(0, 2)
-}
+// Use 2 variables, then check if element is smaller than first, then check if element smaller than second
+// If element is smaller than first, then second should take first value and first takes element value
+// If element is bigger that first, but smaller than second, then second should take element value
 
-console.log(findSmallest([6, 4, -6, 8, 2, 1, 5])) //[-6, 1]
+function findSmallest(arr){
+    if (arr.length < 2) {return arr.slice()}
+    let first = Infinity
+    let second = Infinity
+    for (let elem of arr){ [first, second]
+        if (elem<first){
+            second=first
+            first = elem
+        }
+        else if (elem <second){
+            second = elem
+        }
+    }
+    return [first, second]
+}
+console.log(findSmallest([6, 4, -6, 8, 2, 1, 5]) ) // [-6, 1]
 console.log(findSmallest([10, 2, 3])) // [2, 3]
 console.log(findSmallest([])) // []
-console.log(findSmallest([6])) // [6]
+console.log(findSmallest([6]))// [6]
 
 
 
@@ -143,6 +194,7 @@ console.log(removeFalsyValuesVar1([7, "ate", "", false, 9])); // [7, "ate", 9]
 
 // 9. CREATE THIRD ARRAY FROM TWO ARRAYS WHICH VALUES ARE ALTERNATING: 1 ELEMENT FROM FIRST, SECOND ELEMENT FROM SECOND ARRAY, THIRD FROM FIRST, FOURTH FROM SECOND ARRAY ETC
 // Find arrays max length, then loop and check if iterator is less than this array length and if yes, add the element to third array
+// Iterator vs this array length : if smaller, add this element
 function alternateMerge(arr1, arr2) {
     const arr3 = []
 
@@ -295,22 +347,18 @@ console.log(returnArrSum([])) //0
 
 
 // 17. CHECK IF ARRAY IS SORTED
-// Start with 1, and compare element with [i-1], if smaller, return false
+// Start with 0, end when length-1; check if element[i] is bigger than element[i+1], return false
 function sortedArray(arr){
-    if (arr.length===1) return true
-    for (let i = 1; i < arr.length; i++){
-        if (arr[i] < arr[i-1]){
-            return false
-        }
+    for (let i = 0; i< arr.length-1; i++){
+       if (arr[i] > arr[i+1]){return false}
     }
     return true
 }
+console.log(sortedArray([4, 3, 5, 8]))          // false
+console.log(sortedArray([3]))                   // true
+console.log(sortedArray([11, 7, 9, 3, 4, 5, 8])) // false
+console.log(sortedArray([4, 5]))                // true
 
-
-console.log(sortedArray([4,3,5,8]))  // false
-console.log(sortedArray([3])) // true
-console.log(sortedArray([11, 7, 9, 3,4,5,8])) // false
-console.log(sortedArray([4,5]))  // true
 
 
 

@@ -18,6 +18,25 @@ function compressStr(str) {
 
 }
 
+// function decompressString(str) {
+//     let final = ''
+//     let current = ''
+//     let count = ''
+//     for (let i = 0 ; i < str.length; i++){
+
+//         if (/\d+/.test(str[i])){
+//             count+=str[i]
+//         }
+//         if (/[a-zA-Z]+/.test(str[i])){
+//             final+=current.repeat(Number(count))
+//             current = str[i]
+//             count=''
+//         }
+//     }
+//     final+=current.repeat(Number(count))
+//     return final
+// }
+
 console.log(compressStr('aaabb')) //a3b2
 console.log(compressStr('aaabbccaaa')) //a3b2c2a3
 

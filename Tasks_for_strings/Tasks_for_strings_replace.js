@@ -29,27 +29,23 @@ console.log(replaceSpacesWithDashes('hello w orld    ')) // hello-w-orld-
 // 3. REPLACE EVERY VOWEL WITH THE NEXT CHARACTER IN THE STRING
 
 function replaceVowelInString(str) {
-    const vowels = ['a', 'e', 'o', 'u', 'i', 'A', 'E', 'O', 'U', 'I']
     let updatedStr = ''
-    for (let i = 0; i < str.length; i++) {
-        if (vowels.includes(str[i])) {
-            if (i + 1 < str.length) {
-                updatedStr += str[i + 1]
-            } else {
-                updatedStr += str[i]
-            }
+    const vowels = ['a', 'i', 'o', 'e', 'u']
+    for (let i = 0 ; i < str.length; i++){
+        if (vowels.includes(str[i].toLowerCase())){
+            let value = str[i+1] ?? str[i]
+            updatedStr+=value
         }
-        else {
-            updatedStr += str[i]
+        else{
+            updatedStr+=str[i]
         }
     }
     return updatedStr
 }
 
-console.log(replaceVowelInString('hello world')) //hlll  wrrld
-console.log(replaceVowelInString('NO')) //NO
-console.log(replaceVowelInString('Apple')); // ppple
-
+console.log(replaceVowelInString('hello world')) // hlll  wrrld
+console.log(replaceVowelInString('NO'))          // NO
+console.log(replaceVowelInString('Apple'))       // ppple
 
 
 

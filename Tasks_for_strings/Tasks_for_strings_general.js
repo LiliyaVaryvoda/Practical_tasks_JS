@@ -57,6 +57,10 @@ console.log(returnWordsAlphabetically('The quick brown fox jumps over the lazy d
 
 
 // 4. GENERATE A RANDOM ALPHANUMERICAL STRING OF GIVEN LENGTH
+// Hardcode the string of all letters and numbers
+// Loop for given length
+// Find the index - Math.floor(Math.random() * hardcoded string length)
+// Add value of this index to the final string
 
 function generateRandomStr(num){
     const values = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -80,7 +84,7 @@ console.log(generateRandomStr(11)) // any random for length 11 aka 6YM8OAdctW8
 
 
 // 5. MASK DIGITS OF PHONE EXCEPT LAST FEW
-
+// Use /\d/.test(elem) to check if element is digit; have a counter for seen digits
 function maskDigits(str, num){
     let numbersArray = []
     let digitsSeen = 0

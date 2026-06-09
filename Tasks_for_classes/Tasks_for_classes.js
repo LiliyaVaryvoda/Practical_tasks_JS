@@ -12,5 +12,11 @@ class Animals {
 
 
 Animals.makeSound()
-const dog = new Animals('Bim')
+const dog = new Animals('Bim', 50)
 //dog.makeSound() // Error
+console.log(dog)
+
+
+
+
+

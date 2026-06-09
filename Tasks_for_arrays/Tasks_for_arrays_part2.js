@@ -262,7 +262,7 @@ console.log(findMinimumNumInArr([{ n: 6 }, { c: 2 }, { n: 5 }, {k:'hello'}])) //
 
 
 // 12. REMOVE SPECIFIC VALUES IN-PLACE
-// Loop through array backwards, then use .splice(index, deleteCount)
+// Loop through array backwards, then use .splice(element to delete index, deleteCount aka 1)
 function removeValueInPlace(arr, num) {
     for (let i = arr.length - 1; i >= 0; i--) {
         if (arr[i] === num) {

@@ -1,5 +1,5 @@
 // 1. EXTRACT LETTERS FROM MIXED STRING
-
+// CLear the string by replacing everything that is not a letter or space
 function extractWords(str){
     const clearedStr = str.replace(/[^a-zA-Z ]/g, '')
     if (clearedStr.length === 0) return -1
@@ -51,7 +51,10 @@ console.log(returnVowels("Hello World"))
 
 
 // 3. EXTRACT SUBSTRING BETWEEN 2 CHARACTERS
-
+// Find first index, if -1, return -1
+// Second index must be (character , position) where position is start index +1 so it will start checking for second index AFTER first index
+// If second index is -1, return -1
+//  Return substring from first index till second index +1  using SLICE()
 function extractSubstringBetweenChars(str, char1, char2){
     const char1Index = str.indexOf(char1)
     const char2Index = str.indexOf(char2, char1Index+1)

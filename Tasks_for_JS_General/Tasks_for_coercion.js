@@ -55,15 +55,3 @@ console.log(true + 2 + 'apples') // '3apples'
 console.log(null + 5 + '!') // '5!'
 
 console.log('5' + (1+2)) // '53'
-
-
-
-
-
-
-
-
-
-
-
-// +, / and *
