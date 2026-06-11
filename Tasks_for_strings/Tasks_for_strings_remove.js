@@ -1,14 +1,20 @@
 // 1. REMOVE REPEATED WORDS
 
-function removeWords(str) {
-    const cleareArr = new Set(str.toLowerCase().replace(/\s+/g, ' ').trim().split(' '))
-    return [...cleareArr].join(' ')
+
+function removeDuplicateWords(str){
+    if (typeof(str)!=='string' || str.trim() === '') { return 'No words found'}
+    const strCleared = str.toLowerCase().match(/[a-zA-Z]+/g) ?? []
+    if (strCleared.length === 0) {return 'No words found'}
+    return [...new Set(strCleared)].join(' ')
 }
 
+console.log(removeDuplicateWords("hello world hello hello")) // "hello world"
+console.log(removeDuplicateWords("one two one")) // "one two"
+console.log(removeDuplicateWords("one two")) // "one two"
+console.log(removeDuplicateWords("")) // No words found
 
-console.log(removeWords('hello world hello hello'));         // 'hello world'
-console.log(removeWords('  one   two  one  '));              // 'one two'
-console.log(removeWords('Word word WORD'));                  // 'word'
+
+
 
 
 

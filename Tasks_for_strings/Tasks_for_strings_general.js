@@ -183,3 +183,73 @@ e = e.slice(-3)
 
 
 console.log(e) // efg
+
+
+
+
+
+
+
+
+// 10. Capitalize words (disregard spaces and characters)
+
+function capitalizeWords(str){
+    if (typeof(str) !== 'string' || str.trim().length === 0){return 'No words found'}
+    const clearedStr = str.match(/[a-zA-Z]+/g) ?? []
+    if (clearedStr.length === 0) {return 'No words found'}
+    const arrCapitalize = clearedStr.map(elem => elem[0].toUpperCase()+elem.slice(1)).join(' ')
+    return arrCapitalize
+}
+
+console.log(capitalizeWords("hello world"))
+// "Hello World"
+
+console.log(capitalizeWords("javaScript is fun"))
+// "JavaScript Is Fun"
+
+console.log(capitalizeWords(""))
+// "No words found"
+
+
+
+
+
+
+
+
+
+
+// 11. Reverse a string
+// Use backwards loop
+
+function reverseString(str){
+    let updatedStr = ''
+    for (let i = str.length-1; i>=0; i--){
+        updatedStr+=str[i]
+    }
+    return updatedStr
+}
+console.log(reverseString("hello")) // "olleh"
+console.log(reverseString("JavaScript")) // tpircSavaJ
+
+
+
+
+
+
+
+
+
+// 12. Repeat characters
+
+
+function repeatChar(str, obj){ 
+    if (typeof(str)!=='string' || str.trim() === '') { return 'Invalid string'}
+    let finalResult = []
+    for (let elem of str){
+        finalResult.push(elem.repeat(obj[elem] ?? 1))
+    }
+    return finalResult.join('')
+} 
+console.log(repeatChar("abc", { a: 1, b: 2, c: 3 })) // abbccc
+

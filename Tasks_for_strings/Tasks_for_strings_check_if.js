@@ -1,17 +1,22 @@
 // 1. CHECK IF STRING IS PALLINDROME
-// Clean the original string, then reverse it and copare to reversed
+// Clean the original string and replace everyting that is not a letter
+// Use 2 variables loop - compare from beginning with from the end characters
+function isPalindrome(str){
+    if (typeof(str)!=='string' || str.trim().length===0){return false}
+    const strCleared = str.toLowerCase().replace(/[^a-z]+/g, '')
+    if (strCleared.length===0){return false}
+    for (let i = 0, y = strCleared.length-1; i<y; i++, y--){
+        if (strCleared[i]!== strCleared[y]){return false}
+    }
+    return true
 
-function isPalindrome(str) {
-    const cleanedStr = str.toLowerCase().replace(/[^a-z0-9]/g, '')
-    const reversedStr = cleanedStr.split('').reverse().join('')
-    return cleanedStr === reversedStr
 }
 
 
-console.log(isPalindrome("racecar")); // true
-console.log(isPalindrome("hello world")); // false
-console.log(isPalindrome("A man, a plan, a canal: Panama")) // true
 
+console.log(isPalindrome("racecar"))// true
+console.log(isPalindrome("hello"))// false
+console.log(isPalindrome("A man a plan a canal Panama"))// true
 
 
 
@@ -20,11 +25,14 @@ console.log(isPalindrome("A man, a plan, a canal: Panama")) // true
 
 
 // 2. CHECK IF TWO STRINGS ARE ANAGRAMS
+// Clean the strings : to lower case, replace everything that is not letter or digit, make arrays and sort them, then join
+// Check if equal using ===
 
 
 function checkIfAnagram(str1, str2) {
-    const sortedStr1 = str1.toLowerCase().replace(/[^a-z0-9]/gi, '').split('').sort().join('')
-    const sortedStr2 = str2.toLowerCase().replace(/[^a-z0-9]/gi, '').split('').sort().join('')
+    if (typeof(str1) !== 'string' || typeof (str2)!=='string') {return false}
+    const sortedStr1 = str1.toLowerCase().replace(/[^a-z0-9]/g, '').split('').sort().join('')
+    const sortedStr2 = str2.toLowerCase().replace(/[^a-z0-9]/g, '').split('').sort().join('')
     return sortedStr1 === sortedStr2
 
 }
@@ -32,6 +40,8 @@ function checkIfAnagram(str1, str2) {
 console.log(checkIfAnagram("listen", "silent")); // true
 console.log(checkIfAnagram("listeN", "Silent")); // true
 console.log(checkIfAnagram("listen", "hello")); // false
+console.log(checkIfAnagram("hello", "world"))// false
+console.log(checkIfAnagram("Dormitory", "Dirty room"))// true
 
 
 

@@ -36,34 +36,31 @@ console.log(findOccurrencesStr("prgogrammingg"))
 
 
 // 2. FIND OCCURENCIES IN STRING FOR WORDS
-// Split by everything that is not letters [/^a-zA-Z/+]
+// Use map
+// Match only a-z ?? []
 
-function findOccurrencesWords(str) {
-    let mapOccurencies = new Map()
-    const arrayOfWords = str.toLowerCase().split(/[^a-zA-Z]/).filter(Boolean)
-    for (let elem of arrayOfWords){
-        if (mapOccurencies.has(elem)){
-            mapOccurencies.set(elem, mapOccurencies.get(elem) + 1)
+function findOccurrencesWords(str){
+    if (typeof(str)!== 'string' || str.trim().length === 0) {return 'Empty string'}
+    let mapOcc= new Map()
+    const clearedStr = str.toLowerCase().match(/[a-z]+/g) ?? []
+    if (clearedStr.length === 0) {return 'Empty string'}
+    for (let elem of clearedStr){
+        if (mapOcc.has(elem)){
+            mapOcc.set(elem, mapOcc.get(elem) +1)
         }
         else{
-            mapOccurencies.set(elem, 1)
+            mapOcc.set(elem, 1)
         }
     }
-    return mapOccurencies
+    return Object.fromEntries(mapOcc)
 }
 
-
-console.log(findOccurrencesWords("Hello world how are you hello, doing hello are ok?"))
-
-// Map(7) {
-//     'hello' => 3,
-//     'world' => 1,
-//     'how' => 1,
-//     'are' => 2,
-//     'you' => 1,
-//     'doing' => 1,
-//     'ok' => 1
-//   }
+console.log(findOccurrencesWords("hello world hello")) // { hello: 2, world: 1 }
+console.log(findOccurrencesWords('Hello   world,how are you?'))// { hello: 2, world: 1 }
+console.log(findOccurrencesWords(''))// Empty string
+console.log(findOccurrencesWords('hello'))// { hello: 1 }
+console.log(findOccurrencesWords('?'))// { hello: 1 }
+console.log(findOccurrencesWords('hello?here'))// { hello: 1, here: 1 }
 
 
 
@@ -153,28 +150,32 @@ console.log(findBiggestOccurencies('hello world here heh')) // { h: 4, e: 4 }
 
 
 // 5. FIND FIRST NOT REPERATIVE CHARACTER IN STRING
+// Use map
+// Loop through string and use map.get(char) to find first with 1
 
-function findNonRepetative(str) {
-    let mapOccurencies = new Map()
-    for (let char = 0; char < str.length; char++) {
-        if (mapOccurencies.has(str[char])) {
-            mapOccurencies.set(str[char], mapOccurencies.get(str[char]) + 1)
-        }
-        else {
-            mapOccurencies.set(str[char], 1)
+function firstUniqueChar(str){
+    if (typeof (str) !== 'string' || str.trim().length===0) { return null}
+    let mapCharacters = new Map()
+    for (let i = 0; i < str.length; i++){
+        if (!mapCharacters.has(str[i])){
+            mapCharacters.set(str[i], 1)
+        }else{
+            mapCharacters.set(str[i], mapCharacters.get(str[i]) +1)
         }
     }
-
-    for (let [key, value] of mapOccurencies.entries()) {
-        if (value === 1) {
-            return [key, str.indexOf(key)]
+    for (let i = 0; i < str.length; i++){
+        if(mapCharacters.get(str[i]) === 1) {
+            return str[i]
         }
     }
+    return null
+
 }
 
 
-console.log(findNonRepetative("aabbbvbc"))
-//[ 'v', 5 ]
+console.log(firstUniqueChar("aabbcdde")) // "c"
+console.log(firstUniqueChar("aabbcc")) // null
+console.log(firstUniqueChar("bbcd")) // c
 
 
 
@@ -279,6 +280,33 @@ function countVowelsInStr(str) {
 
 console.log(countVowelsInStr('opIudhgnfi'))
 // Map(3) { 'o' => 1, 'i' => 2, 'u' => 1 }
+
+
+
+
+
+
+
+
+// 9.1 Count vowels (just count)
+// Use count variable and Set
+// Loop through string and check if set has it, update count
+
+function countVowels(str){
+    if (typeof(str)!== 'string' || str.trim().length === 0){return 0}
+    const vowelsSet = new Set(['a', 'e', 'i', 'o', 'u'])
+    let count = 0
+    for (let elem of str){
+        if (vowelsSet.has(elem)){
+            count++
+        }
+    }
+    return count
+}
+
+console.log(countVowels("hello")) // 2
+console.log(countVowels("aaa")) // 3
+console.log(countVowels("JavaScript")) // 3
 
 
 
@@ -468,3 +496,162 @@ console.log(countSubstringOccurency('hello hello hello', 'hello')) //3
 console.log(countSubstringOccurency('abababa', 'aba')) //3
 console.log(countSubstringOccurency('aaaaa', 'aa')) //4
 console.log(countSubstringOccurency('abc', '')) //0
+
+
+
+
+
+
+
+
+
+
+// 17. FInd the most frequesnt char in string
+
+function mostFrequentChar(str){
+    let mapOcc = new Map()
+    const cleanedStr = str.toLowerCase().replace(/\s+/g, '')
+    if (cleanedStr.length === 0) {return null}
+    for (let elem of cleanedStr){
+        if (mapOcc.has(elem)){
+            mapOcc.set(elem, mapOcc.get(elem) +1)
+        }else{
+            mapOcc.set(elem,1)
+        }
+    }
+    let count = 0
+    let char = null
+    for (let [key, value] of mapOcc.entries()){
+        if (value > count){
+            char = key
+            count = value
+        }
+    }
+    return {char, count}
+}
+
+console.log(mostFrequentChar("javascript"))
+// {
+//   char: "a",
+//   count: 2
+// }
+
+console.log(mostFrequentChar("mississippi"))
+// {
+//   char: "i",
+//   count: 4
+// }
+
+console.log(mostFrequentChar("world"))
+// {
+//   char: "w",
+//   count: 1
+// }
+
+
+
+
+
+
+
+// 18. FInd first dub
+
+function findFirstDup(str){
+    if (typeof(str)!== 'string' || str.trim() === ''){return 'No dub'}
+    const seen = new Set()
+    for (let elem of str){
+        if (seen.has(elem)){
+            return elem
+        }
+        else{
+            seen.add(elem)
+        }
+    }
+    return 'No dub'
+}
+
+
+console.log(findFirstDup('abcfab')) //a
+
+
+
+
+
+
+
+
+
+
+
+// 19. FInd longest non repeated substring
+
+function longestUniqueSubstring(str){
+    if (typeof(str) !== 'string' || str.trim()===''){return 'Invalid string'}
+    let longestStrLength = 0
+            let longestSubstring
+
+    let seen = new Set()
+    let left = 0
+    for (let right = 0;right < str.length; right++){
+        while (seen.has(str[right])){
+            seen.delete(str[left])
+            left++
+        }
+        seen.add(str[right])
+        let currentLength = seen.size
+        if (currentLength>longestStrLength){
+            longestStrLength = currentLength
+            longestSubstring = str.slice(left, right+1)
+        }
+    }
+    return longestSubstring
+
+}
+
+
+
+console.log(longestUniqueSubstring("abcabcbb")) //"abc"
+
+console.log(longestUniqueSubstring("bbbbb")) //b
+
+
+
+
+
+
+
+
+
+
+// 20. FInd longest pallindrome in string
+
+function longestPalindrome(str){
+    if (typeof(str)!=='string' || str.trim()===''){return 'Invalid string'}
+    let start = 0
+    let maxLength = 1
+
+    for (let i =0; i< str.length; i++){
+        expand(i, i)
+        expand(i, i+1)
+    }
+
+    function expand(left, right){
+        while(left>=0 && right <str.length && str[left] === str[right]){
+            const lengthPallindrom = right - left + 1
+            if (lengthPallindrom > maxLength){
+                start = left
+                maxLength = lengthPallindrom
+            }
+            left--
+            right++
+        }
+    }
+    return str.slice(start, start+maxLength)
+
+}
+
+console.log(longestPalindrome("babad"))
+// "bab"
+
+console.log(longestPalindrome("cbbd"))
+// "bb"

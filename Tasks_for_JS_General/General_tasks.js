@@ -1,27 +1,34 @@
 // 1. CHECK IF BALANCED BRACKETS
-// Create object with key-values for opening and closing brackets, loop through string and add opening brackets into temporary aray
-// Then if there is closing bracket, use .pop() to have last opening bracket and compare them using key-values
-// If not pair, false, if start from closing bracket false, if in the end length is > 0 , false
-function checkIfBalancedBrackets(str) {
-    const pairs = {
-        '{' : '}',
-        '[' : ']',
-        '(' : ')'
-    }
-    let balancedBrackets = []
-    for (let elem of str){
-        if(elem === '(' || elem === '{' || elem=== '['){
-            balancedBrackets.push(elem)
-        }
-        if (elem === ')' || elem === '}' || elem ===']'){
-            if (balancedBrackets.length===0) { return false}
-            let lastValue = balancedBrackets.pop()
-            if (elem !== pairs[lastValue]){return false}
-        }
+// Create object with key value pairs for brackets
+// If opening bracket, push to stack array
+// If closing bracket, check if last stack bracket correspond to this closing bracket (use object pairs)
+// If correct, remove last opening bracket from stack array
+// At the end check array length, correct is empty
 
+function checkIfBalancedBrackets(str) {
+    if (typeof (str) !== 'string') {return false}
+    let stack = []
+    const parentheses = {
+        '}': '{',
+        ']': '[',
+        ')': '('
     }
-    return balancedBrackets.length===0? true: false
+    for (let elem of str) {
+        if (elem === '{' || elem === '[' || elem === '(') {
+            stack.push(elem)
+        }
+        else if (elem === '}' || elem === ')' || elem === ']') {
+            if (stack[stack.length - 1] !== parentheses[elem] || stack.length === 0) {
+                return false
+            }
+            else {
+                stack.pop()
+            }
+        }
+    }
+    return stack.length>0 ? false : true
 }
+
 
 console.log(checkIfBalancedBrackets('(hello))')) // false
 console.log(checkIfBalancedBrackets('(hello))(')) // false
@@ -351,3 +358,46 @@ console.log(levelRise(1.5, 25));
   
   //console.log(a) //Error a is not defined, erro in strict mode
   console.log(b) // 5 for non-strict mode, error in strict mode
+
+
+
+
+
+
+
+
+
+
+  // 15. Group anagram
+  // If sorted variant does not exist in map, add sorted variant to map as key
+  // And add this element to value array
+  // Return values
+
+
+function groupAnagrams(arr) {
+    let mapGroup = new Map()
+    for (let elem of arr) {
+        const sortedElem = elem.split('').sort().join('')
+        if (!mapGroup.has(sortedElem)) {
+            mapGroup.set(sortedElem, [])
+        }
+        const sortedElemValues = mapGroup.get(sortedElem)
+        sortedElemValues.push(elem)
+    }
+    return [...mapGroup.values()]
+}
+
+console.log(groupAnagrams([
+    "eat",
+    "tea",
+    "tan",
+    "ate",
+    "nat",
+    "bat"
+]))
+
+// [
+//   ["eat", "tea", "ate"],
+//   ["tan", "nat"],
+//   ["bat"]
+// ]
