@@ -655,3 +655,37 @@ console.log(longestPalindrome("babad"))
 
 console.log(longestPalindrome("cbbd"))
 // "bb"
+
+
+
+
+
+
+
+
+
+// 21. Find common in one array
+
+
+
+
+function findCommon(arr){
+    if (arr.length === 0) {return -1}
+    let commonValues = ''
+    const arrString = arr.map(String)
+    const firstValue = arrString[0]
+    for (let char = 0; char<firstValue.length; char++){
+
+
+        for (let word = 1; word<arrString.length; word++){
+
+            if (arrString[word][char]!== firstValue[char]){
+                return commonValues || -1
+            }
+        }
+        commonValues+=firstValue[char]
+    }
+    return commonValues
+}
+
+console.log(findCommon([1234,1234567,12345,1234])) //1234

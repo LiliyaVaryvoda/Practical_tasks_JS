@@ -351,7 +351,7 @@ console.log(objectRectangle.getPerimeter())
 
 
 // 11. Check if property exist in object
-
+// use Object method hasOwn()
 
 const userPropertyCheck = {
   name: "Anna",
@@ -368,4 +368,68 @@ console.log(Object.hasOwn(userPropertyCheck, 'email')) //true
 
 
 
-// 12. 
+// 12. Swap keys and values
+
+const obj = {
+  a: 1,
+  b: 2,
+  c: 3
+};
+
+
+function swapKeysValues(obj){
+    const newObj = {}
+    for (let key in obj){
+        newObj[obj[key]]= key
+    }
+    return newObj
+}
+
+console.log(swapKeysValues(obj)) // { '1': 'a', '2': 'b', '3': 'c' }
+
+
+
+
+
+
+
+
+
+// 13. Write a function that converts a nested dictionary into a flat dictionary using the dot (.) as a key separator
+
+
+
+function flatten(data, path = '', result={}) {
+    for (let [key, value] of Object.entries(data)) {
+        const newPath = path? `${path}.${key}` : key
+        if (typeof value === 'object') {
+            flatten(value, newPath, result)
+        }
+        
+        else{
+            result[newPath] = value
+        }
+    }
+    return result
+}
+
+data = {
+    "user": {
+        "name": "Anna",
+        "address": {
+            "city": "London",
+            "zip": "01001"
+        }
+    },
+    "active": true
+}
+
+console.log(flatten(data))
+
+// Expected result 
+//{
+// "user.name": "Anna",
+// "user.address.city": "London",
+// "user.address.zip": "01001",
+// "active": True
+//}

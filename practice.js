@@ -195,24 +195,6 @@
 
 // // get(user, "profile.address.city")
 
-// // TASK:
-// // Swap keys and values
-
-// const obj = {
-//   a: 1,
-//   b: 2,
-//   c: 3
-// };
-
-
-// function swapKeysValues(obj){
-//     for (let key in obj){
-//         console.log(key, obj[key])
-
-//     }
-// }
-
-// console.log(swapKeysValues(obj))
 
 
 // // TASK:
@@ -384,13 +366,6 @@
 //   [1, 2], { x: 1 }, () => 42, Symbol("s"), BigInt(9000)
 // ]) 
 // // [ 1, 2, 3, 4, 5, 6, 11.5, -12, 0 ]
-
-
-
-
-
-// chunkArray([1, 2, 3, 4, 5, 6, 7], 3) // [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7 ] ]
-
 
 
 
@@ -1080,3 +1055,414 @@
 
 // // Manacher palindrome
 // console.log(longestPalindromeManacher("babad")) // "bab" or "aba"
+
+
+
+// ----------------------
+// [1,2,3] -> [1,1,2,2,3,3] dublicate each element
+// duplicate means use 2? 
+
+// function duplicateElements(arr){
+//     const finalArr = []
+//     for (let elem of arr){
+//         for (let i =0; i < 2; i++){
+//             finalArr.push(elem)
+//         }
+//     }
+//     return finalArr
+// }
+
+// console.log(duplicateElements([1,2,3])) // 112233
+
+// -----------------
+// // return only duplicayed values
+
+// // [1,2,2,3,3,3] // 2 3 
+
+// function returnDuplicates(arr){
+//     const dubArr = []
+//     const setArr = new Set()
+//     for (let elem of arr){
+//         if (!setArr.has(elem)){
+//             setArr.add(elem)
+//         }
+//         else{
+//             dubArr.push(elem)
+//         }
+//     }
+//     return dubArr
+// }
+
+
+// console.log(returnDuplicates([1,2,2,3,3])) //2, 3
+
+
+
+
+
+// ---------------
+// return arr without dup
+
+// function returnArrWithoutDup(arr){
+//     const arrSet = new Set()
+//     for (let elem of arr){
+//         if (!arrSet.has(elem)){
+//             arrSet.add(elem)
+//         }
+//     }
+//     return [...arrSet]
+// }
+
+// console.log(returnArrWithoutDup([1,2,2,3,3,4])) // 1 2 3 4
+
+
+
+
+
+// -------
+// rotate ???
+
+
+
+
+// ----
+// Reverse array
+
+// function reverseArr(arr){
+//     const reversedArr = []
+//     for (let i=arr.length-1; i>=0; i--){
+//         reversedArr.push(arr[i])
+//     }
+//     return reversedArr
+// }
+
+// console.log(reverseArr([1,2,3,4,5])) // 5 4 3 2 1
+
+
+
+
+
+
+// ------
+// double every number
+
+// function doubleNumber(arr){
+//     const arrUpd = []
+//     for (let elem of arr){
+//         arrUpd.push(elem*2)
+//     }
+//     return arrUpd
+// }
+
+// console.log(doubleNumber([2,3,4])) //4 6 8
+
+
+
+
+
+// ----------
+// Square every num
+
+
+// function squareNumber(arr){
+//     const arrUpd = []
+//     for (let elem of arr){
+//         arrUpd.push(elem**2)
+//     }
+//     return arrUpd
+// }
+
+// console.log(squareNumber([2,3,4])) //4 9 16
+
+
+
+
+// ----------------
+
+// // repeat evelment by its index +1
+// function repeatElem(arr) {
+//     const finalArr = []
+//     for (let i = 0, j = i + 1; i < arr.length; i++) {
+//         for (let y = 0; y < i + 1; y++) {
+//             finalArr.push(arr[i])
+//         }
+//     }
+//     return finalArr
+// }
+// console.log(repeatElem([3, 2, 1])) // 3 2 2 1 1 1
+
+
+
+
+
+
+// find first dup value and find first repeating - what is the diff????
+
+// function findFirstDup(arr){
+//     const arrSet = new Set()
+//     for (let elem of arr){
+//         if (arrSet.has(elem)){
+//             return elem
+//         }
+//         else{
+//             arrSet.add(elem)
+//         }
+//     }
+//     return 'No duplicate found'
+// }
+// console.log(findFirstDup([1,2,2 ,3 ,3])) //2
+// console.log(findFirstDup([1,2,3,2,3,3])) //2
+
+
+
+
+// find common
+
+//[[1,2,3],[2,3,4],[2,5]] //2
+
+
+// function findCommon(arr){
+//     const firstValue = new Set(arr[0])
+//     const result = new Set()
+//     for (let digit of firstValue){
+//         let isCommon = true
+//         for (let word = 1; word < arr.length; word++){
+//             const current = new Set(arr[word])
+//             if (!current.has(digit)){
+//                 isCommon = false
+//                 break
+//             }
+//         }
+//         if(isCommon){
+//             result.add(digit)
+//         }
+//     }
+//     return Array.from(result)
+// }
+
+// console.log(findCommon([[1,2,3],[2,3,4],[2,5]])) //2
+
+
+
+// // find common
+// //['apple','banana','grape']
+
+// function findCommonValues(arr){
+//     const firstValue = arr[0]
+//     let common = ''
+//     for (let char = 0 ; char<firstValue.length; char++){
+//         for(let word = 1; word< arr.length; word++){
+//             if (!arr[word].includes(firstValue[char])){
+//                 return common || -1
+//             }
+//         }
+//         common+=firstValue[char]
+//     }
+//     return common
+// }
+
+
+// console.log(findCommonValues(['apple','banana','grape']))
+
+
+// find missing
+// [1,2,4,5]
+
+
+
+
+// find all missing
+// [1,2,4,6,8]
+// [3,5,7]
+
+
+
+
+
+
+// remove some number
+
+// -----------------
+//find all pair
+
+// [1,2,3,4,5]
+
+// [
+//  [1,2],
+//  [1,3],
+//  [1,4],
+//  [1,5],
+//  [2,3],
+//  ...
+// ]
+
+
+
+
+// -----------
+// Find all pairs whose sum equals target.
+// [1,2,3,4,5]
+// target = 5
+
+// [
+//  [1,4],
+//  [2,3]
+// ]
+
+// function targetSumNumbers(arr, target){
+//     const map = new Map()
+//     for (let i =0 ; i<arr.length; i++){
+//         const neededNumber = target - arr[i]
+//         if (map.has(neededNumber)){
+//             return [map.get(neededNumber), i]
+//         }
+//         else{
+//             map.set(arr[i], i)
+//         }
+//     }
+//     return -1
+// }
+
+// console.log(targetSumNumbers([2,7,11,15, 5,4], 9)) // [1, 0]
+// console.log(targetSumNumbers([2,7,11,15], 1)) // -1
+// console.log(targetSumNumbers([2,2,2,2], 4)) // -[2,2]
+
+
+
+
+
+
+// find peak elements
+
+//[1,2,3,4,5]//5
+
+
+
+
+// find max difference
+//[1,2,3,4,5]//4
+
+
+// find 1 and 2 largest
+//[3,7,1,9,4] // 9 7
+
+
+
+
+
+// product of arr except self
+// [1,2,3,4,5]
+// [120, 60,40,30,24]
+
+
+
+
+
+
+
+
+
+// flatten [1,[2,3],[4]] => [1,2,3,4]
+
+
+
+
+// rotate array
+//[1,2,3,4,5], 2
+//=> [4,5,1,2,3]
+
+
+
+
+
+
+// longest common suffix
+// ["testing","ing","coding"]
+//=> "ing"
+
+
+
+
+
+// "listen", "silent"
+//=> true
+
+
+
+// "aaabbc"
+//=> "a3b2c1"
+
+
+
+// find mode
+// [1,2,2,3,2,4]
+//=> 2
+
+
+
+
+
+
+// find all dub
+// [1,2,2,3,3,4]
+// => [2,3]
+
+
+
+
+// [2,7,11,15], 9
+// => [0,1]
+
+
+
+// [
+//  {id:1,type:"A"},
+//  {id:2,type:"B"},
+//  {id:3,type:"A"}
+// ]
+
+// => {
+//   A:[...],
+//   B:[...]
+// }
+
+
+
+// [100,4,200,1,3,2]
+// => 4 // 1,2,3,4
+
+
+
+
+
+// function sumArrGroups(arr){
+//     const finalArr = []
+//     let count = 1
+//     for (let i = 0; i<arr.length; i++){
+//         if (arr[i] === arr[i+1]){
+//             count++
+//             console.log(count)
+//         }
+//         else{
+//             finalArr.push(arr[i] * count)
+//             count=1
+//         }
+//     }
+//     return finalArr
+// }
+
+// console.log(sumArrGroups([1,1,2,2,2,3])) // [2,6,3]
+// console.log(sumArrGroups([1,2,3])) // [1,2,3]
+
+// [1,1,1,2,2,3]
+// => [[1,3],[2,2],[3,1]]
+
+
+
+const obj1 = {
+    name: 'Ana'
+}
+
+obj1 = {name:'Inna'}
+
+console.log(obj1.name)

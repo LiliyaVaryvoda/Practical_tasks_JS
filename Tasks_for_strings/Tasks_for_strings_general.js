@@ -253,3 +253,38 @@ function repeatChar(str, obj){
 } 
 console.log(repeatChar("abc", { a: 1, b: 2, c: 3 })) // abbccc
 
+
+
+
+
+
+
+
+
+
+
+// 13. Repeat by value
+
+
+
+
+
+function repeatByValue(arr){
+    let repeatedArr = []
+    //return arr.flatMap(elem => Array(elem).fill(elem))
+    for (let elem of arr){
+        for (let i = 0; i< Math.abs(elem); i++){
+            repeatedArr.push(elem)
+        }
+    }
+    return repeatedArr
+}
+
+
+console.log(repeatByValue([1,5,3, -2]))
+
+// [
+//    1, 5, 5, 5,  5,
+//    5, 3, 3, 3, -2,
+//   -2
+// ]
